@@ -17,3 +17,61 @@ function slidechange() {
 
 slidechange();
 setInterval(slidechange, 2500);
+
+fetch('https://gamees-api.netlify.app/public/filteredGames.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Error fetching data");
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+    displaydata(data);
+  })
+  .catch(err => {
+    console.error("Error fetching data:", err);
+  });
+
+  const displaycarte = document.getElementById('displaycartes');
+  display.innerHTML = '';
+  function displaydata(data)
+  {
+    
+    const carte = document.createElement('div');
+    carte.id = 'carte';
+    carte.className = "flex flex-wrap gap-4 justify-center";
+    
+    data.forEach(game=>{
+        let iconClass = '';
+        let platformName = 'Unknown';
+        if (game.platforms && game.platforms.length > 0) {
+            platformName = game.platforms[0].platform.name.toLowerCase();
+            if(platformName.includes('windows'))
+            {
+              iconClass = 'fab fa-windows';
+            }else if(platformName.includes('playstation'))
+            {
+              iconClass = 'fab fa-playstation';
+            }else if(platformName.includes('xbox'))
+            {
+              iconClass = 'fab fa-xbox';
+            }
+            else if(platformName.includes('nintendo'))
+            {
+              iconClass = 'fas fa-gamepad';
+            }
+        }
+        carte.innerHTML = `
+         <div class="w-[300px] h-[800px} bg-[#676363] rounded-[10px]">
+            <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px]"/>
+            <div>
+                <h1 class="text-white">${game.name}</h1>
+               <h2 class="text-white"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
+            </div>
+         </div>
+        `;
+    })
+
+        displaycarte.appendChild(carte);
+  }
