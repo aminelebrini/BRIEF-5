@@ -28,7 +28,25 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
   .then(data => {
     console.log('Résultats des jeux :', data.results);
     console.log('Page suivante :', data.next);
-    displaydata(data.results);
+    const allgame = data.results;
+    displaydata(allgame);
+    document.getElementById('genre').addEventListener('change', (e)=>{
+    const gender = e.target.value;
+
+    if (gender === 'All') {
+       displaydata(allgame);
+       return;
+    }
+    const filtred_Cartes = allgame.filter(game =>{
+      if(game.genres && game.genres.length > 0)
+      {
+        return game.genres.some(g => g.name.toLowerCase() === gender.toLowerCase());
+      }
+      return false;
+    });
+    console.log(filtred_Cartes);
+    displaydata(filtred_Cartes);
+    });
   })
   .catch(error => {
     console.error('Erreur lors de la récupération des jeux :', error);
@@ -53,8 +71,8 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
     
     for(let i =0 ; i < Math.min(12, data.length); i++)
     {
-      let game = data[i];
-      let iconClass = '';
+        let game = data[i];
+        let iconClass = '';
         let platformName = 'Unknown';
         let genre = 'Unknown';
         if (game.genre !== undefined && game.genre !== null) {
@@ -103,3 +121,4 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
 
         displaycarte.appendChild(carte);
   }
+
