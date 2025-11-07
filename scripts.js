@@ -20,20 +20,20 @@ function slidechange() {
 slidechange();
 setInterval(slidechange, 2500);
 
-fetch('https://gamees-api.netlify.app/public/filteredGames.json')
+fetch('https://debuggers-games-api.duckdns.org/api/games')
   .then(response => {
-    if (!response.ok) {
-      throw new Error("Error fetching data");
-    }
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
     return response.json();
   })
   .then(data => {
-    console.log(data);
-    displaydata(data);
+    console.log('Résultats des jeux :', data.results);
+    console.log('Page suivante :', data.next);
+    displaydata(data.results);
   })
-  .catch(err => {
-    console.error("Error fetching data:", err);
+  .catch(error => {
+    console.error('Erreur lors de la récupération des jeux :', error);
   });
+
 
   function clickTodisplay()
   {
@@ -43,7 +43,7 @@ fetch('https://gamees-api.netlify.app/public/filteredGames.json')
   }
   //fonction de l'affichage
   const displaycarte = document.getElementById('displaycartes');
-  display.innerHTML = '';
+  displaycarte.innerHTML = '';
   function displaydata(data)
   {
     
@@ -51,7 +51,7 @@ fetch('https://gamees-api.netlify.app/public/filteredGames.json')
     carte.id = 'carte';
     carte.className = "flex flex-wrap gap-4 justify-center";
     
-    for(let i =0 ; i < Math.min(30, data.length); i++)
+    for(let i =0 ; i < Math.min(12, data.length); i++)
     {
       let game = data[i];
       let iconClass = '';
@@ -65,9 +65,9 @@ fetch('https://gamees-api.netlify.app/public/filteredGames.json')
           }
         if (game.platforms && game.platforms.length > 0) {
             platformName = game.platforms[0].platform.name.toLowerCase();
-            if(platformName.includes('windows'))
+            if(platformName.includes('pc'))
             {
-              iconClass = 'fab fa-windows';
+              iconClass = 'fa-brands fa-windows';
             }else if(platformName.includes('playstation'))
             {
               iconClass = 'fab fa-playstation';
@@ -77,7 +77,15 @@ fetch('https://gamees-api.netlify.app/public/filteredGames.json')
             }
             else if(platformName.includes('nintendo'))
             {
-              iconClass = 'fas fa-gamepad';
+              iconClass = 'fas fa-nintendo';
+            }
+            else if(platformName.includes('android'))
+            {
+              iconClass = 'fab fa-android';
+            }
+            else if(platformName.includes('ios'))
+            {
+              iconClass = 'fab fa-iphone';
             }
         }
         carte.innerHTML += `
