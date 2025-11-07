@@ -8,6 +8,7 @@ let slideImages = [
 
 const slideDiv = document.getElementById('slide');
 let i = 0;
+const displaycarte = document.getElementById('displaycartes');
 
 function slidechange() {
     slideDiv.style.backgroundImage = `url("${slideImages[i]}")`;
@@ -28,7 +29,30 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
   .then(data => {
     console.log('Résultats des jeux :', data.results);
     console.log('Page suivante :', data.next);
-    displaydata(data.results);
+    const allgame = data.results;
+    displaydata(allgame);
+    document.getElementById('genre').addEventListener('change', (e)=>{
+    const gender = e.target.value;
+
+    if (gender === 'All') {
+      displaycarte.innerHTML = "";
+       displaydata(allgame);
+       return;
+    }
+    else{
+      displaycarte.innerHTML = "";
+      const filtred_Cartes = allgame.filter(game =>{
+        if(game.genres && game.genres.length > 0)
+        {
+          return game.genres.some(g => g.name.toLowerCase() === gender.toLowerCase());
+        }
+      return false;
+    });
+    console.log(filtred_Cartes);
+    displaydata(filtred_Cartes);
+    }
+    
+    });
   })
   .catch(error => {
     console.error('Erreur lors de la récupération des jeux :', error);
@@ -42,7 +66,6 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
      window.location.href = '#section';
   }
   //fonction de l'affichage
-  const displaycarte = document.getElementById('displaycartes');
   displaycarte.innerHTML = '';
   function displaydata(data)
   {
@@ -53,8 +76,8 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
     
     for(let i =0 ; i < Math.min(12, data.length); i++)
     {
-      let game = data[i];
-      let iconClass = '';
+        let game = data[i];
+        let iconClass = '';
         let platformName = 'Unknown';
         let genre = 'Unknown';
         if (game.genre !== undefined && game.genre !== null) {
@@ -92,7 +115,7 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
-                <h1 class="text-white text-[30px] font-bold">${game.name}</h1>
+                <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
                 <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
@@ -103,3 +126,4 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
 
         displaycarte.appendChild(carte);
   }
+
