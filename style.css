@@ -1,0 +1,21 @@
+.txt1 {
+    animation: left_to_right 2s ease-in-out forwards;
+}
+.txt2 {
+    animation: left_to_right 1.5s ease-in-out forwards;
+}
+
+@keyframes left_to_right {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(4%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(4%);
+        opacity: 1;
+    }
+}

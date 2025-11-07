@@ -1,8 +1,10 @@
 let slideImages = [
     "https://drop-assets.ea.com/images/63e0S1gWvaFpYSAHyCu5Zo/5a0f2fec92b19ae8e8de9ac99e15e0d3/battlefield-6-all-out-warfare-16x9.jpg?im=AspectCrop=(16,9),xPosition=0.434375,yPosition=0.4962962962962963;Resize=(1280)&q=85",
     "https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/legacy/modern-warfare/features/multiplayer/Harbinger.jpg",
-    "https://drop-assets.ea.com/images/2KVQq4lSBcPUJct6DEjdic/c06c2dc0e4ffc9a213fd1e8d8a7c2e72/FC26_Rev_Stadium_Clubs_16x9.jpg?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5;Resize=(1280)&q=85"
-];
+    "https://drop-assets.ea.com/images/2KVQq4lSBcPUJct6DEjdic/c06c2dc0e4ffc9a213fd1e8d8a7c2e72/FC26_Rev_Stadium_Clubs_16x9.jpg?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5;Resize=(1280)&q=85",
+    "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/gta-v/6f3821f838206d283eb6d4daba97d40eee78aa51.jpg",
+    "https://www.konami.com/efootball/s/img/main_page_1.png?v=856"
+  ];
 
 const slideDiv = document.getElementById('slide');
 let i = 0;
@@ -18,23 +20,30 @@ function slidechange() {
 slidechange();
 setInterval(slidechange, 2500);
 
-fetch('https://gamees-api.netlify.app/public/filteredGames.json')
+fetch('https://debuggers-games-api.duckdns.org/api/games')
   .then(response => {
-    if (!response.ok) {
-      throw new Error("Error fetching data");
-    }
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
     return response.json();
   })
   .then(data => {
-    console.log(data);
-    displaydata(data);
+    console.log('Résultats des jeux :', data.results);
+    console.log('Page suivante :', data.next);
+    displaydata(data.results);
   })
-  .catch(err => {
-    console.error("Error fetching data:", err);
+  .catch(error => {
+    console.error('Erreur lors de la récupération des jeux :', error);
   });
 
+
+  function clickTodisplay()
+  {
+    const section = document.getElementById('section');
+    section.style.display = 'block';
+     window.location.href = '#section';
+  }
+  //fonction de l'affichage
   const displaycarte = document.getElementById('displaycartes');
-  display.innerHTML = '';
+  displaycarte.innerHTML = '';
   function displaydata(data)
   {
     
@@ -42,14 +51,23 @@ fetch('https://gamees-api.netlify.app/public/filteredGames.json')
     carte.id = 'carte';
     carte.className = "flex flex-wrap gap-4 justify-center";
     
-    data.forEach(game=>{
-        let iconClass = '';
+    for(let i =0 ; i < Math.min(12, data.length); i++)
+    {
+      let game = data[i];
+      let iconClass = '';
         let platformName = 'Unknown';
+        let genre = 'Unknown';
+        if (game.genre !== undefined && game.genre !== null) {
+              genre = game.genre;
+          } 
+          else if (game.genres !== undefined && game.genres.length > 0) {
+              genre = game.genres[0].name;
+          }
         if (game.platforms && game.platforms.length > 0) {
             platformName = game.platforms[0].platform.name.toLowerCase();
-            if(platformName.includes('windows'))
+            if(platformName.includes('pc'))
             {
-              iconClass = 'fab fa-windows';
+              iconClass = 'fa-brands fa-windows';
             }else if(platformName.includes('playstation'))
             {
               iconClass = 'fab fa-playstation';
@@ -59,19 +77,29 @@ fetch('https://gamees-api.netlify.app/public/filteredGames.json')
             }
             else if(platformName.includes('nintendo'))
             {
-              iconClass = 'fas fa-gamepad';
+              iconClass = 'fas fa-nintendo';
+            }
+            else if(platformName.includes('android'))
+            {
+              iconClass = 'fab fa-android';
+            }
+            else if(platformName.includes('ios'))
+            {
+              iconClass = 'fab fa-iphone';
             }
         }
-        carte.innerHTML = `
-         <div class="w-[300px] h-[800px} bg-[#676363] rounded-[10px]">
-            <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px]"/>
-            <div>
-                <h1 class="text-white">${game.name}</h1>
-               <h2 class="text-white"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
+        carte.innerHTML += `
+         <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
+            <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
+            <div class="p-2">
+                <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
+                <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
             </div>
          </div>
         `;
-    })
+    }
 
         displaycarte.appendChild(carte);
   }
