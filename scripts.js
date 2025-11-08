@@ -7,6 +7,7 @@ let slideImages = [
   ];
 
 const slideDiv = document.getElementById('slide');
+const displaycarte = document.getElementById('displaycartes');
 let i = 0;
 
 function slidechange() {
@@ -32,20 +33,48 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
     displaydata(allgame);
     document.getElementById('genre').addEventListener('change', (e)=>{
     const gender = e.target.value;
-
+    //for platforms
+    //condition to gender
     if (gender === 'All') {
-       displaydata(allgame);
-       return;
+      displaycarte.innerHTML = "";
+      displaydata(allgame);
+      return;
     }
-    const filtred_Cartes = allgame.filter(game =>{
-      if(game.genres && game.genres.length > 0)
-      {
-        return game.genres.some(g => g.name.toLowerCase() === gender.toLowerCase());
+    else{
+        displaycarte.innerHTML = "";
+        const filtred_Cartes = allgame.filter(game =>{
+        if(game.genres && game.genres.length > 0)
+        {
+          return game.genres.some(g => g.name.toLowerCase() === gender.toLowerCase());
+        }
+        return false;
+        });
+        console.log(filtred_Cartes);
+        displaydata(filtred_Cartes);
       }
-      return false;
     });
-    console.log(filtred_Cartes);
-    displaydata(filtred_Cartes);
+    document.getElementById('platformes').addEventListener('change', (e)=>{
+    const platform = e.target.value.toLowerCase();
+    //console.log(platform);
+    //condition to platforms
+    if(platform === 'All')
+     {
+        displaycarte.innerHTML = "";
+        displaydata(allgame);
+        return;
+      }else{
+        displaycarte.innerHTML = "";
+        const filtred_Cartes_platform = allgame.filter(game =>{
+          if(game.platforms && game.platforms.length > 0)
+          {
+            console.log(game.platforms.length);
+            return game.platforms.some(p => p.platform.name.toLowerCase().includes(platform));
+          }
+          return false;
+        });
+        console.log(filtred_Cartes_platform);
+        displaydata(filtred_Cartes_platform);
+      }
     });
   })
   .catch(error => {
@@ -56,11 +85,13 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
   function clickTodisplay()
   {
     const section = document.getElementById('section');
+    const footer = document.getElementById('footer');
     section.style.display = 'block';
-     window.location.href = '#section';
+    footer.style.display = 'flex';
+    footer.className = "bg-[#FFFFFF] w-full flex flex-row items-center justify-around p-5";
+    window.location.href = '#section';
   }
   //fonction de l'affichage
-  const displaycarte = document.getElementById('displaycartes');
   displaycarte.innerHTML = '';
   function displaydata(data)
   {
@@ -110,7 +141,7 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
-                <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
+                <h1 class="text-white text-[22px] font-bold"><a href="#" >${game.name}</a></h1>
                 <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
