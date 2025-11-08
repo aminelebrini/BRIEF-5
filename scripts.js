@@ -72,6 +72,7 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
           }
           return false;
         });
+        
         console.log(filtred_Cartes_platform);
         displaydata(filtred_Cartes_platform);
       }
