@@ -47,11 +47,12 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
         {
           return game.genres.some(g => g.name.toLowerCase() === gender.toLowerCase());
         }
-      return false;
-    });
-    console.log(filtred_Cartes);
-    displaydata(filtred_Cartes);
-    }
+        return false;
+        });
+        //console.log(filtred_Cartes);
+        displaydata(filtred_Cartes);
+      }
+    return false;
     document.getElementById('platformes').addEventListener('change', (e)=>{
     const platform = e.target.value.toLowerCase();
     //console.log(platform);
@@ -66,13 +67,35 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
         const filtred_Cartes_platform = allgame.filter(game =>{
           if(game.platforms && game.platforms.length > 0)
           {
-            console.log(game.platforms.length);
+            //console.log(game.platforms.length);
             return game.platforms.some(p => p.platform.name.toLowerCase().includes(platform));
           }
           return false;
         });
-        console.log(filtred_Cartes_platform);
+        //console.log(filtred_Cartes_platform);
         displaydata(filtred_Cartes_platform);
+      }
+    });
+    document.getElementById('Notes').addEventListener('change', (e)=>{
+      const note = e.target.value;
+
+      if(note === 'All')
+      {
+        displaycarte.innerHTML = "";
+        displaydata(allgame);
+      }
+      else{
+        displaycarte.innerHTML = "";
+        const filtred_Cartes_notes = allgame.filter(game=>{
+          if(game.ratings && game.ratings.length > 0)
+          {
+            //console.log(game.ratings.length);
+            return game.ratings.some(p=> p.title.toLowerCase() === note.toLowerCase());
+          }
+          return false;
+        })
+        //console.log(filtred_Cartes_notes);
+        displaydata(filtred_Cartes_notes);
       }
     });
   })
@@ -144,6 +167,7 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
                 <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
             </div>
          </div>
         `;
