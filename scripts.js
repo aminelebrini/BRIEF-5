@@ -7,6 +7,7 @@ let slideImages = [
   ];
 
 const slideDiv = document.getElementById('slide');
+const displaycarte = document.getElementById('displaycartes');
 let i = 0;
 const displaycarte = document.getElementById('displaycartes');
 
@@ -33,7 +34,7 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
     displaydata(allgame);
     document.getElementById('genre').addEventListener('change', (e)=>{
     const gender = e.target.value;
-
+      
     if (gender === 'All') {
       displaycarte.innerHTML = "";
        displaydata(allgame);
@@ -51,7 +52,28 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
     console.log(filtred_Cartes);
     displaydata(filtred_Cartes);
     }
-    
+    document.getElementById('platformes').addEventListener('change', (e)=>{
+    const platform = e.target.value.toLowerCase();
+    //console.log(platform);
+    //condition to platforms
+    if(platform === 'All')
+     {
+        displaycarte.innerHTML = "";
+        displaydata(allgame);
+        return;
+      }else{
+        displaycarte.innerHTML = "";
+        const filtred_Cartes_platform = allgame.filter(game =>{
+          if(game.platforms && game.platforms.length > 0)
+          {
+            console.log(game.platforms.length);
+            return game.platforms.some(p => p.platform.name.toLowerCase().includes(platform));
+          }
+          return false;
+        });
+        console.log(filtred_Cartes_platform);
+        displaydata(filtred_Cartes_platform);
+      }
     });
   })
   .catch(error => {
@@ -62,8 +84,11 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
   function clickTodisplay()
   {
     const section = document.getElementById('section');
+    const footer = document.getElementById('footer');
     section.style.display = 'block';
-     window.location.href = '#section';
+    footer.style.display = 'flex';
+    footer.className = "bg-[#FFFFFF] w-full flex flex-row items-center justify-around p-5";
+    window.location.href = '#section';
   }
   //fonction de l'affichage
   displaycarte.innerHTML = '';

@@ -35,7 +35,7 @@
         <div class="w-full flex flex-row items-center justify-center">
             <h1 class="text-white text-[60px] font-bold ">New and trending</h1>
         </div>
-        <div class="filtres mt-[4%] flex flex-row items-center justify-evenly gap-2 w-full">
+        <div id="filtres" class="filtres mt-[4%] flex flex-row items-center justify-evenly gap-2 w-full">
             <select id="genre" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
                 <option value="genre" class="text-black text-[20px]">Genre</option>
                 <option value="All" class="text-black text-[20px]">All</option>
@@ -46,25 +46,38 @@
             </select>
             <!--2-->
             <select id="platformes" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
-                <option value="Platformes" class="text-black text-[20px]">Platformes</option>
+                <option class="text-black text-[20px] disbled">Platforms</option>
+                <option value="All" class="text-black text-[20px]">All Platforms</option>
                 <option value="PC" class="text-black text-[20px]">PC</option>
-                <option value="PlayStation4" class="text-black text-[20px]">PlayStation 4</option>
-                <option value="XboxOne" class="text-black text-[20px]">Xbox One</option>
-                <option value="IOS" class="text-black text-[20px]">iOS</option>
+                <option value="PlayStation" class="text-black text-[20px]">PlayStation 4</option>
+                <option value="Xbox" class="text-black text-[20px]">Xbox One</option>
+                <option value="iOS" class="text-black text-[20px]">iOS</option>
                 <option value="Android" class="text-black text-[20px]">Android</option>
             </select>
             <!--3-->
             <select id="Notes" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
                 <option value="Notes" class="text-black text-[20px]">Notes</option>
-                <option value="1" class="text-yellow text-[20px]">★☆☆☆☆</option>
-                <option value="2" class="text-yellow text-[20px]">★★☆☆☆</option>
-                <option value="3" class="text-yellow text-[20px]">★★★☆☆</option>
-                <option value="4" class="text-yellow text-[20px]">★★★★☆</option>
-                <option value="5" class="text-yellow text-[20px]">★★★★★</option>
+                <option value="1" class="text-black text-[20px]">★☆☆☆☆</option>
+                <option value="2" class="text-black text-[20px]">★★☆☆☆</option>
+                <option value="3" class="text-black text-[20px]">★★★☆☆</option>
+                <option value="4" class="text-black text-[20px]">★★★★☆</option>
+                <option value="5" class="text-black text-[20px]">★★★★★</option>
             </select>
+            <!-- <select id="affichageN" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
+                <option value="Notes" class="text-black text-[20px]">number of cards to display</option>
+                <option value="12" class="text-black text-[20px]">12</option>
+                <option value="24" class="text-black text-[20px]">24</option>
+                <option value="36" class="text-black text-[20px]">36</option>
+                <option value="48" class="text-black text-[20px]">48</option>
+                <option value="60" class="text-black text-[20px]">60</option>
+                <option value="72" class="text-black text-[20px]">72</option>
+                <option value="84" class="text-black text-[20px]">84</option>
+            </select> -->
         </div>
-        <div class="displaycartes h-full w-full flex flex-wrap gap-1 p-5" id="displaycartes"></div>
-        <footer class="bg-[#FFFFFF] w-full flex flex-row items-center justify-around p-5">
+        <div class="displaycartes h-full w-full flex flex-wrap gap-1 p-5" id="displaycartes">
+        </div>
+    </div>
+    <footer id="footer" class="hidden">
         <h1 class="text-[30px] w-[20%] font-bold">NexPlay</h1>
         <div class="socialmedia w-[70%] flex flex-row items-center justify-center gap-3 text-[30px]">
             <i class="fab fa-facebook"></i>
@@ -74,8 +87,6 @@
         </div>
         <h1 class="text-[20px] w-[20%]">ALL RIGHT ARE SAVE©2025</h1>
     </footer>
-    </div>
-    
     <script src="./scripts.js"></script>
 </body>
 </html>
