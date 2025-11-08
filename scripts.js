@@ -72,11 +72,22 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
           }
           return false;
         });
-        
         console.log(filtred_Cartes_platform);
         displaydata(filtred_Cartes_platform);
       }
     });
+    document.getElementById('Notes').addEventListener('change', (e)=>{
+      const note = e.target.value;
+
+      if(note === 'All')
+      {
+        displaycarte.innerHTML = "";
+        displaydata(allgame);
+      }
+      else{
+        displaycarte.innerHTML = "";
+      }
+    })
   })
   .catch(error => {
     console.error('Erreur lors de la récupération des jeux :', error);
