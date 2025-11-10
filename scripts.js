@@ -181,6 +181,42 @@ fetchGames();
         displaycarte.appendChild(carte);
   }
 
+const paginationN = document.getElementById('btnext');
+
+//btn next and previous
+let n = 1;
+document.getElementById('btnext').addEventListener('click', ()=>{
+  window.location.href = "#section";
+  n += 1;
+  fetchNext(n);
+})
+
+document.getElementById('btnprevi').addEventListener('click', ()=>{
+  window.location.href = "#section";
+  n -= 1;
+  fetchNext(n);
+})
+//btn next and previous
+
+async function fetchNext(n) {
+   try{
+    const response = await fetch(`https://debuggers-games-api.duckdns.org/api/games?page=${n}`);
+    if(!response.ok)
+    {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    const data = await response.json();
+    
+    console.log("le resultat suivant" + data.results);
+    const allgame2 = data.results;
+    //console.log(allgame2.length);
+    nextDataRes(allgame2);
+  }catch(error)
+  {
+    console.error('Erreur lors du chargement de la page suivante :', error);
+  }
+}
+
 function nextDataRes(next)
 {
     displaycarte.innerHTML = "";
@@ -192,17 +228,41 @@ function nextDataRes(next)
     {
       let game = next[i];
       let genre = 'Unknown';
+      let platform = 'Unknown';
       if (game.genres && game.genres.length > 0) {
       genre = game.genres[0].name;
       }
-
-      const iconClass = "fa-solid fa-gamepad";
+      // if(game.platforms && game.platforms.length > 0)
+      // {
+      //     platform = game.platforms[0].name.toLowerCase();
+      //     if(platform.includes('pc'))
+      //     {
+      //       iconClass = 'fa-brands fa-windows';
+      //     }else if(platform.includes('playstation'))
+      //     {
+      //       iconClass = 'fab fa-playstation';
+      //     }else if(platform.includes('xbox'))
+      //     {
+      //       iconClass = 'fab fa-xbox';
+      //     }
+      //     else if(platform.includes('nintendo'))
+      //     {
+      //       iconClass = 'fas fa-nintendo';
+      //     }
+      //     else if(platform.includes('android'))
+      //     {
+      //       iconClass = 'fab fa-android';
+      //     }
+      //     else if(platform.includes('ios'))
+      //     {
+      //       iconClass = 'fab fa-iphone';
+      //     }
+      // }
       carte.innerHTML += `
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
                 <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
-                <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
@@ -213,20 +273,3 @@ function nextDataRes(next)
     }
    displaycarte.appendChild(carte);
 }
-
-document.getElementById('btnext').addEventListener('click', async ()=>{
-  try{
-    const response = await fetch('https://debuggers-games-api.duckdns.org/api/games?page=2');
-    if(!response.ok)
-    {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("le resultat suivant" + data.results);
-    const allgame2 = data.results;
-    nextDataRes(allgame2);
-  }catch(error)
-  {
-    console.error('Erreur lors du chargement de la page suivante :', error);
-  }
-})
