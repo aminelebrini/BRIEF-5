@@ -183,7 +183,7 @@ fetchGames();
 
 function nextDataRes(next)
 {
-    displaydata.innerHTML = "";
+    displaycarte.innerHTML = "";
     const carte = document.createElement('div');
     carte.className = "flex flex-wrap gap-4 justify-center";
     carte.id = "carte";
@@ -194,7 +194,7 @@ function nextDataRes(next)
       let genre = 'Unknown';
       if (game.genres && game.genres.length > 0) {
       genre = game.genres[0].name;
-    }
+      }
 
       const iconClass = "fa-solid fa-gamepad";
       carte.innerHTML += `
