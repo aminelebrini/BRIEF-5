@@ -111,15 +111,6 @@ fetchGames();
     footer.className = "bg-[#FFFFFF] w-full flex flex-row items-center justify-around p-5";
     window.location.href = '#section';
   }
-  //fonction de l'affichage
-  // displaycarte.innerHTML = '';
-  //   let twelve = 12;
-  //   let n = 0;
-  //   document.getElementById('btnmore').addEventListener('click', ()=>{
-
-  //     n += 12;
-  //     displaydata(data);
-  //   })
   function displaydata(data)
   {
     
