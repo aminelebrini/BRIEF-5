@@ -21,7 +21,7 @@
         </div>
     </header>
     <div id="slide" class="slide w-full h-[88vh] bg-cover bg-center transition-all duration-500">
-        <div class="dark w-full h-[88vh] bg-black opacity-35 z-10"></div>
+        <div class="dark w-full h-[88vh] bg-black opacity-[50%] z-10"></div>
         <div class="titles absolute top-[30%] left-[10%] w-[80%] h-[40%]">
             <h2 class="txt1 text-white z-10 text-[65px] ">Level up your play.</h2>
             <h3 class="txt2 text-white z-10 text-[75px] font-bold">Welcome to NexPlay.</h3>
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="section w-full mt-[2%] flex flex-col items-center justify-center hidden align-center" id="section">
+    <div class="section w-full mt-[2%] flex flex-col items-center justify-center align-center" id="section">
         <div class="w-full flex flex-row items-center justify-center">
             <h1 class="text-white text-[60px] font-bold ">New and trending</h1>
         </div>
@@ -75,8 +75,9 @@
             </select> -->
         </div>
         <div class="displaycartes h-full w-full flex flex-wrap gap-1 p-5" id="displaycartes"></div>
-        <div class="btnexplore w-full h-[90px] flex flex-row items-center justify-center">
-            <button type="button" class="bg-white w-[160px] h-[60px] rounded-[10px] text-[30px] font-bold">MORE <i class="fas fa-arrow-right"></i></button>
+        <div class="btnexplore w-[50%] h-[90px] flex flex-row items-center justify-around">
+            <button type="button" id="btnext" class="bg-white w-[150px] h-[60px] rounded-[10px] text-[20px] font-bold"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button type="button" id="btnext" class="bg-white w-[150px] h-[60px] rounded-[10px] text-[20px] font-bold">Next <i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
     <footer id="footer" class="hidden">
@@ -87,7 +88,7 @@
             <i class="fab fa-x-twitter"></i>
             <i class="fab fa-discord"></i>
         </div>
-        <h1 class="text-[20px] w-[20%]">ALL RIGHT ARE SAVE©2025</h1>
+        <h1 class="text-[20px] w-[25%]">ALL RIGHT ARE SAVE©2025</h1>
     </footer>
     <script src="./scripts.js"></script>
 </body>
