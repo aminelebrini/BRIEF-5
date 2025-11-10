@@ -183,20 +183,16 @@ fetchGames();
 
 const paginationN = document.getElementById('btnext');
 
-//btn next and previous
 let n = 1;
 document.getElementById('btnext').addEventListener('click', ()=>{
-  window.location.href = "#section";
   n += 1;
   fetchNext(n);
 })
 
 document.getElementById('btnprevi').addEventListener('click', ()=>{
-  window.location.href = "#section";
   n -= 1;
   fetchNext(n);
 })
-//btn next and previous
 
 async function fetchNext(n) {
    try{
