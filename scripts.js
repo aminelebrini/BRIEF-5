@@ -3,13 +3,13 @@ let slideImages = [
     "https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/legacy/modern-warfare/features/multiplayer/Harbinger.jpg",
     "https://drop-assets.ea.com/images/2KVQq4lSBcPUJct6DEjdic/c06c2dc0e4ffc9a213fd1e8d8a7c2e72/FC26_Rev_Stadium_Clubs_16x9.jpg?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5;Resize=(1280)&q=85",
     "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/gta-v/6f3821f838206d283eb6d4daba97d40eee78aa51.jpg",
+    "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/12/call-of-duty-advanced-warfare-riot-shield.jpg?w=1200&h=628&fit=crop",
     "https://www.konami.com/efootball/s/img/main_page_1.png?v=856"
   ];
 
 const slideDiv = document.getElementById('slide');
 const displaycarte = document.getElementById('displaycartes');
 let i = 0;
-const displaycarte = document.getElementById('displaycartes');
 
 function slidechange() {
     slideDiv.style.backgroundImage = `url("${slideImages[i]}")`;
@@ -22,63 +22,84 @@ function slidechange() {
 slidechange();
 setInterval(slidechange, 2500);
 
-fetch('https://debuggers-games-api.duckdns.org/api/games')
-  .then(response => {
+async function fetchGames() {
+  try {
+    const response = await fetch('https://debuggers-games-api.duckdns.org/api/games');
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-    return response.json();
-  })
-  .then(data => {
+
+    const data = await response.json();
     console.log('Résultats des jeux :', data.results);
     console.log('Page suivante :', data.next);
+
     const allgame = data.results;
     displaydata(allgame);
-    document.getElementById('genre').addEventListener('change', (e)=>{
-    const gender = e.target.value;
-      
-    if (gender === 'All') {
+
+    // --- Filtrae par genre ---
+    document.getElementById('genre').addEventListener('change', (e) => {
+      const gender = e.target.value;
       displaycarte.innerHTML = "";
-       displaydata(allgame);
-       return;
-    }
-    else{
-      displaycarte.innerHTML = "";
-      const filtred_Cartes = allgame.filter(game =>{
-        if(game.genres && game.genres.length > 0)
-        {
-          return game.genres.some(g => g.name.toLowerCase() === gender.toLowerCase());
-        }
-      return false;
-    });
-    console.log(filtred_Cartes);
-    displaydata(filtred_Cartes);
-    }
-    document.getElementById('platformes').addEventListener('change', (e)=>{
-    const platform = e.target.value.toLowerCase();
-    //console.log(platform);
-    //condition to platforms
-    if(platform === 'All')
-     {
-        displaycarte.innerHTML = "";
+
+      if (gender === 'All') {
         displaydata(allgame);
         return;
-      }else{
-        displaycarte.innerHTML = "";
-        const filtred_Cartes_platform = allgame.filter(game =>{
-          if(game.platforms && game.platforms.length > 0)
-          {
-            console.log(game.platforms.length);
-            return game.platforms.some(p => p.platform.name.toLowerCase().includes(platform));
-          }
-          return false;
-        });
-        console.log(filtred_Cartes_platform);
-        displaydata(filtred_Cartes_platform);
       }
+
+      const filtred_Cartes = allgame.filter(game => {
+        if (game.genres && game.genres.length > 0) {
+          return game.genres.some(g => g.name.toLowerCase() === gender.toLowerCase());
+        }
+        return false;
+      });
+
+      displaydata(filtred_Cartes);
     });
-  })
-  .catch(error => {
+
+    // --- Filtre par plateforme ---
+    document.getElementById('platformes').addEventListener('change', (e) => {
+      const platform = e.target.value.toLowerCase();
+      displaycarte.innerHTML = "";
+
+      if (platform === 'All') {
+        displaydata(allgame);
+        return;
+      }
+
+      const filtred_Cartes_platform = allgame.filter(game => {
+        if (game.platforms && game.platforms.length > 0) {
+          return game.platforms.some(p => p.platform.name.toLowerCase().includes(platform));
+        }
+        return false;
+      });
+
+      displaydata(filtred_Cartes_platform);
+    });
+
+    // --- Filtre par note ---
+    document.getElementById('Notes').addEventListener('change', (e) => {
+      const note = e.target.value;
+      displaycarte.innerHTML = "";
+
+      if (note === 'All') {
+        displaydata(allgame);
+        return;
+      }
+
+      const filtred_Cartes_notes = allgame.filter(game => {
+        if (game.ratings && game.ratings.length > 0) {
+          return game.ratings.some(p => p.title.toLowerCase() === note.toLowerCase());
+        }
+        return false;
+      });
+
+      displaydata(filtred_Cartes_notes);
+    });
+
+  } catch (error) {
     console.error('Erreur lors de la récupération des jeux :', error);
-  });
+  }
+}
+
+fetchGames();
 
 
   function clickTodisplay()
@@ -90,17 +111,15 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
     footer.className = "bg-[#FFFFFF] w-full flex flex-row items-center justify-around p-5";
     window.location.href = '#section';
   }
-  //fonction de l'affichage
-  displaycarte.innerHTML = '';
   function displaydata(data)
   {
     
     const carte = document.createElement('div');
     carte.id = 'carte';
     carte.className = "flex flex-wrap gap-4 justify-center";
-    
-    for(let i =0 ; i < Math.min(12, data.length); i++)
+    for(let i = 0 ; i < data.length; i++)
     {
+        //console.log(data.length);
         let game = data[i];
         let iconClass = '';
         let platformName = 'Unknown';
@@ -144,6 +163,7 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
                 <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
             </div>
          </div>
         `;
@@ -152,3 +172,92 @@ fetch('https://debuggers-games-api.duckdns.org/api/games')
         displaycarte.appendChild(carte);
   }
 
+let n = 1;
+document.getElementById('btnext').addEventListener('click', ()=>{
+  window.location.href = "#section";
+  n += 1;
+  fetchNext(n);
+})
+
+document.getElementById('btnprevi').addEventListener('click', ()=>{
+  window.location.href = "#section";
+  n -= 1;
+  fetchNext(n);
+})
+//btn next and previous
+
+async function fetchNext(n) {
+   try{
+    const response = await fetch(`https://debuggers-games-api.duckdns.org/api/games?page=${n}`);
+    if(!response.ok)
+    {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    const data = await response.json();
+    
+    console.log("le resultat suivant" + data.results);
+    const allgame2 = data.results;
+    //console.log(allgame2.length);
+    nextDataRes(allgame2);
+  }catch(error)
+  {
+    console.error('Erreur lors du chargement de la page suivante :', error);
+  }
+}
+
+function nextDataRes(next)
+{
+    displaycarte.innerHTML = "";
+    const carte = document.createElement('div');
+    carte.className = "flex flex-wrap gap-4 justify-center";
+    carte.id = "carte";
+
+    for(let i = 0; i < next.length; i++)
+    {
+      let game = next[i];
+      let genre = 'Unknown';
+      let platform = 'Unknown';
+      if (game.genres && game.genres.length > 0) {
+      genre = game.genres[0].name;
+      }
+      // if(game.platforms && game.platforms.length > 0)
+      // {
+      //     platform = game.platforms[0].name.toLowerCase();
+      //     if(platform.includes('pc'))
+      //     {
+      //       iconClass = 'fa-brands fa-windows';
+      //     }else if(platform.includes('playstation'))
+      //     {
+      //       iconClass = 'fab fa-playstation';
+      //     }else if(platform.includes('xbox'))
+      //     {
+      //       iconClass = 'fab fa-xbox';
+      //     }
+      //     else if(platform.includes('nintendo'))
+      //     {
+      //       iconClass = 'fas fa-nintendo';
+      //     }
+      //     else if(platform.includes('android'))
+      //     {
+      //       iconClass = 'fab fa-android';
+      //     }
+      //     else if(platform.includes('ios'))
+      //     {
+      //       iconClass = 'fab fa-iphone';
+      //     }
+      // }
+      carte.innerHTML += `
+         <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
+            <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
+            <div class="p-2">
+                <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
+            </div>
+         </div>
+        `;
+       
+    }
+   displaycarte.appendChild(carte);
+}

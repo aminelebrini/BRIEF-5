@@ -21,7 +21,7 @@
         </div>
     </header>
     <div id="slide" class="slide w-full h-[88vh] bg-cover bg-center transition-all duration-500">
-        <div class="dark w-full h-[88vh] bg-black opacity-35 z-10"></div>
+        <div class="dark w-full h-[88vh] bg-black opacity-[50%] z-10"></div>
         <div class="titles absolute top-[30%] left-[10%] w-[80%] h-[40%]">
             <h2 class="txt1 text-white z-10 text-[65px] ">Level up your play.</h2>
             <h3 class="txt2 text-white z-10 text-[75px] font-bold">Welcome to NexPlay.</h3>
@@ -56,12 +56,12 @@
             </select>
             <!--3-->
             <select id="Notes" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
-                <option value="Notes" class="text-black text-[20px]">Notes</option>
-                <option value="1" class="text-black text-[20px]">★☆☆☆☆</option>
-                <option value="2" class="text-black text-[20px]">★★☆☆☆</option>
-                <option value="3" class="text-black text-[20px]">★★★☆☆</option>
-                <option value="4" class="text-black text-[20px]">★★★★☆</option>
-                <option value="5" class="text-black text-[20px]">★★★★★</option>
+                <option value="Notes" class="text-black text-[20px] disabled">Notes</option>
+                <option value="All" class="text-black text-[20px]">All Notes</option>
+                <option value="recommended" class="text-black text-[20px]">recommended</option>
+                <option value="exceptional" class="text-black text-[20px]">Exceptional</option>
+                <option value="meh" class="text-black text-[20px]">Meh</option>
+                <option value="skip" class="text-black text-[20px]">skip</option>
             </select>
             <!-- <select id="affichageN" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
                 <option value="Notes" class="text-black text-[20px]">number of cards to display</option>
@@ -74,7 +74,10 @@
                 <option value="84" class="text-black text-[20px]">84</option>
             </select> -->
         </div>
-        <div class="displaycartes h-full w-full flex flex-wrap gap-1 p-5" id="displaycartes">
+        <div class="displaycartes h-full w-full flex flex-wrap gap-1 p-5" id="displaycartes"></div>
+        <div class="btnexplore w-[100%] h-[90px] flex flex-row items-center justify-center gap-[45px]">
+            <button type="button" id="btnprevi" class="bg-white w-[150px] h-[60px] rounded-[10px] text-[20px] font-bold"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button type="button" id="btnext" class="bg-white w-[150px] h-[60px] rounded-[10px] text-[20px] font-bold">Next <i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
     <footer id="footer" class="hidden">
@@ -85,7 +88,7 @@
             <i class="fab fa-x-twitter"></i>
             <i class="fab fa-discord"></i>
         </div>
-        <h1 class="text-[20px] w-[20%]">ALL RIGHT ARE SAVE©2025</h1>
+        <h1 class="text-[20px] w-[25%]">ALL RIGHT ARE SAVE©2025</h1>
     </footer>
     <script src="./scripts.js"></script>
 </body>
