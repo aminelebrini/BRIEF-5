@@ -34,7 +34,7 @@ async function fetchGames() {
     const allgame = data.results;
     displaydata(allgame);
 
-    // --- Filtre par genre ---
+    // --- Filtrae par genre ---
     document.getElementById('genre').addEventListener('change', (e) => {
       const gender = e.target.value;
       displaycarte.innerHTML = "";
@@ -180,3 +180,53 @@ fetchGames();
 
         displaycarte.appendChild(carte);
   }
+
+function nextDataRes(next)
+{
+    displaydata.innerHTML = "";
+    const carte = document.createElement('div');
+    carte.className = "flex flex-wrap gap-4 justify-center";
+    carte.id = "carte";
+
+    for(let i = 0; i < next.length; i++)
+    {
+      let game = next[i];
+      let genre = 'Unknown';
+      if (game.genres && game.genres.length > 0) {
+      genre = game.genres[0].name;
+    }
+
+      const iconClass = "fa-solid fa-gamepad";
+      carte.innerHTML += `
+         <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
+            <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
+            <div class="p-2">
+                <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
+                <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
+            </div>
+         </div>
+        `;
+       
+    }
+   displaycarte.appendChild(carte);
+}
+
+document.getElementById('btnext').addEventListener('click', async ()=>{
+  try{
+    const response = await fetch('https://debuggers-games-api.duckdns.org/api/games?page=2');
+    if(!response.ok)
+    {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("le resultat suivant" + data.results);
+    const allgame2 = data.results;
+    nextDataRes(allgame2);
+  }catch(error)
+  {
+    console.error('Erreur lors du chargement de la page suivante :', error);
+  }
+})
