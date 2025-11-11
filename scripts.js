@@ -144,7 +144,7 @@ fetchGames();
             }
             else if(platformName.includes('nintendo'))
             {
-              iconClass = 'fas fa-nintendo';
+              iconClass = 'fab fa-nintendo';
             }
             else if(platformName.includes('android'))
             {
@@ -152,7 +152,7 @@ fetchGames();
             }
             else if(platformName.includes('ios'))
             {
-              iconClass = 'fab fa-iphone';
+              iconClass = 'fab fa-apple';
             }
         }
         carte.innerHTML += `
@@ -182,6 +182,10 @@ document.getElementById('btnext').addEventListener('click', ()=>{
 document.getElementById('btnprevi').addEventListener('click', ()=>{
   window.location.href = "#section";
   n -= 1;
+  if(n <= 0)
+  {
+    n = 1;
+  }
   fetchNext(n);
 })
 //btn next and previous
@@ -204,7 +208,6 @@ async function fetchNext(n) {
     console.error('Erreur lors du chargement de la page suivante :', error);
   }
 }
-
 function nextDataRes(next)
 {
     displaycarte.innerHTML = "";
