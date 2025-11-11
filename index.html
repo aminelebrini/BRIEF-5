@@ -11,22 +11,22 @@
 <body class="bg-[#151515] flex flex-col items-center justify-center">
     <header class="flex flex-row items-center justify-between w-[100%] p-5">
         <h1 class="text-white text-[30px] font-bold">NexPlay</h1>
-        <div class="flex flex-row items-center justify-center text-white bg-[#302E2E] gap-2 p-3 rounded-[10px]">
+        <div class="flex flex-row items-center justify-center text-white bg-[#302E2E] gap-2 p-3 rounded-[10px] hidden md:block">
             <i class="fas fa-search"></i>
             <input type="text" placeholder="Search" class="outline-0 w-[300px]">
         </div>
         <div class="btn-header">
-            <button type="button" class="bg-white w-[50px] h-[50px] rounded-[50%]"><i class="fas fa-heart text-black text-[30px]"></i></button>
-            <button type="button" class="bg-white w-[50px] h-[50px] rounded-[50%]"><i class="fas fa-save text-black text-[30px]"></i></button>
+            <button type="button" class="bg-white w-[40px] h-[40px] rounded-[50%] md:w-[50px] md:h-[50px]"><i class="fas fa-heart text-black text-[20px] md:text-[30px]"></i></button>
+            <button type="button" class="bg-white w-[40px] h-[40px] rounded-[50%] md:w-[50px] md:h-[50px]"><i class="fas fa-save text-black text-[20px] md:text-[30px]"></i></button>
         </div>
     </header>
     <div id="slide" class="slide w-full h-[88vh] bg-cover bg-center transition-all duration-500">
         <div class="dark w-full h-[88vh] bg-black opacity-[50%] z-10"></div>
         <div class="titles absolute top-[30%] left-[10%] w-[80%] h-[40%]">
-            <h2 class="txt1 text-white z-10 text-[65px] ">Level up your play.</h2>
-            <h3 class="txt2 text-white z-10 text-[75px] font-bold">Welcome to NexPlay.</h3>
+            <h2 class="txt1 text-white z-10 text-[40px] md:text-[65px]">Level up your play.</h2>
+            <h3 class="txt2 text-white z-10 text-[40px] md:text-[70px] font-bold">Welcome to NexPlay.</h3>
             <div class="explore z-10">
-                <button type="button" onclick="clickTodisplay()" class="bg-transparent border-white border-3 rounded-[15px] w-[200px] h-[70px] z-10 align-center text-[30px] text-white absolute top-[100%] left-[42%] font-medium hover:bg-white hover:text-black transition-all duration-500">Explore Now</button>
+                <button type="button" onclick="clickTodisplay()" class="bg-transparent border-white border-3 rounded-[15px] w-[200px] h-[70px] z-10 align-center text-[30px] text-white absolute top-[100%] left-[20%] font-medium hover:bg-white hover:text-black transition-all duration-500">Explore Now</button>
             </div>
         </div>
     </div>
@@ -82,13 +82,13 @@
     </div>
     <footer id="footer" class="hidden">
         <h1 class="text-[30px] w-[20%] font-bold">NexPlay</h1>
-        <div class="socialmedia w-[70%] flex flex-row items-center justify-center gap-3 text-[30px]">
+        <div class="socialmedia w-[60%] flex flex-row items-center justify-center gap-3 text-[30px]">
             <i class="fab fa-facebook"></i>
             <i class="fab fa-instagram"></i>
             <i class="fab fa-x-twitter"></i>
             <i class="fab fa-discord"></i>
         </div>
-        <h1 class="text-[20px] w-[25%]">ALL RIGHT ARE SAVE©2025</h1>
+        <h1 class="text-[20px] w-[20%]">ALL RIGHT ARE SAVE©2025</h1>
     </footer>
     <script src="./scripts.js"></script>
 </body>
