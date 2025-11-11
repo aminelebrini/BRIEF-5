@@ -144,7 +144,7 @@ fetchGames();
             }
             else if(platformName.includes('nintendo'))
             {
-              iconClass = 'fas fa-nintendo';
+              iconClass = 'fab fa-nintendo';
             }
             else if(platformName.includes('android'))
             {
@@ -152,7 +152,7 @@ fetchGames();
             }
             else if(platformName.includes('ios'))
             {
-              iconClass = 'fab fa-iphone';
+              iconClass = 'fab fa-apple';
             }
         }
         carte.innerHTML += `
@@ -182,6 +182,10 @@ document.getElementById('btnext').addEventListener('click', ()=>{
 document.getElementById('btnprevi').addEventListener('click', ()=>{
   window.location.href = "#section";
   n -= 1;
+  if(n <= 0)
+  {
+    n = 1;
+  }
   fetchNext(n);
 })
 //btn next and previous
@@ -205,6 +209,7 @@ async function fetchNext(n) {
   }
 }
 
+toPage(this);
 function nextDataRes(next)
 {
     displaycarte.innerHTML = "";
@@ -250,7 +255,7 @@ function nextDataRes(next)
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
-                <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
+                <h1 id="name" class="text-white text-[22px] font-bold" onclick="toPage(element)">${game.name}</h1>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
@@ -260,4 +265,9 @@ function nextDataRes(next)
        
     }
    displaycarte.appendChild(carte);
+}
+
+function toPage(element) {
+  const name = element.dataset.name;
+  console.log(name);
 }
