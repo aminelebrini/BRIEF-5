@@ -24,10 +24,7 @@ document.getElementById('explore').addEventListener('click', ()=>{
     window.location.href = Website;
 })
 
-
 document.getElementById('introgame').innerText = Description;
-
-
 //document.getElementById('swipercard').appendChild(Bgadd);
 const swiperCards = document.querySelectorAll('#swipercard');
 
@@ -57,11 +54,19 @@ releaseDateElem.innerText = Release;
 
 const proprities = document.getElementById('prop');
 
-for(let i = 0; i < 9; i++)
-{
-    const carte1 = document.createElement('div');
-    carte1.textContent = Name;
-}
-proprities.appendChild(carte1);
+// for(let i = 0; i < 9; i++)
+// {
+//     const carte1 = document.createElement('div');
+//     carte1.textContent = Name;
+//     proprities.appendChild(carte1);
+// }
 
+const os = document.getElementById("os");
+const processor = document.getElementById("processor");
+const memory = document.getElementById("memory");
+const graphics = document.getElementById("graphics");
+const directx = document.getElementById("directx");
+const storage = document.getElementById("storage");
+const soundcard = document.getElementById("soundcard");
+const notes = document.getElementById("notes");
 
