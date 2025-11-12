@@ -20,22 +20,17 @@
             <button type="button" class="bg-white w-[40px] h-[40px] rounded-[50%] md:w-[50px] md:h-[50px]"><i class="fas fa-save text-black text-[20px] md:text-[30px]"></i></button>
         </div>
     </header>
-    <div class="relative bg-[url('https://drop-assets.ea.com/images/63e0S1gWvaFpYSAHyCu5Zo/5a0f2fec92b19ae8e8de9ac99e15e0d3/battlefield-6-all-out-warfare-16x9.jpg?im=AspectCrop=(16,9),xPosition=0.434375,yPosition=0.4962962962962963;Resize=(1280)&q=85')] bg-cover bg-center w-full h-[88vh]">
+    <div id="slide1" class="minislide relative bg-cover bg-center w-full h-[88vh]">
     <div class="absolute inset-0 bg-black/50 z-10"></div>
     <div class="relative z-20 flex flex-col md:flex-row items-center justify-between h-full px-[10%]">
     <div class="text-section flex flex-col items-start justify-center w-full md:w-1/2 space-y-4">
-        <h1 id="titre" class="text-[35px] md:text-[85px] text-white font-bold uppercase">Battlefield 6</h1>
+        <h1 id="titre" class="titre text-[35px] md:text-[85px] text-white font-bold uppercase"></h1>
         <div id="icons" class="icons text-[25px] text-white space-x-3 md:text-[40px]">
-            <i class="fab fa-windows"></i>
-            <i class="fab fa-playstation"></i>
-            <i class="fab fa-xbox"></i>
-            <i class="fab fa-android"></i>
-            <i class="fab fa-apple"></i>
         </div>
-        <button type="button" class="bg-white text-black font-semibold p-3 rounded-[10px] mt-[10px] hover:bg-gray-200 transition-all duration-200 md:w-[250px] md:h-[70px] md:text-[30px]">EXPLORE <i class="fas fa-arrow-right ml-2"></i></button>
+        <button type="button" id="explore" class="explore bg-white text-black font-semibold p-3 rounded-[10px] mt-[10px] hover:bg-gray-200 transition-all duration-200 md:w-[250px] md:h-[70px] md:text-[30px]">EXPLORE <i class="fas fa-arrow-right ml-2"></i></button>
     </div>
     <div class="gameimg flex flex-col items-center justify-center w-full md:w-1/2 mt-10 md:mt-0">
-        <img src="https://cdn.mos.cms.futurecdn.net/Y3Xj8yBRyr3jKkv8PnPTdf.jpg" id="logoimg" class="w-[200px] md:w-[250px] rounded-[15px]" alt="imagelogo">
+        <img id="logoimg" src="" class="logoimg w-[100px] h-[300px] md:w-[250px] rounded-[15px] md:shadow-2xs" alt="imagelogo">
         <div class="rate text-[#EBF70E] text-[22px] mt-2" id="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -51,11 +46,11 @@
     <div class="aboutext md:col-start-1 md:col-end-5 md:row-span-3 flex flex-col justify-center">
         <h1 class="text-white text-[30px] md:text-[70px] font-bold mb-4" id="about">ABOUT</h1>
         <p id="introgame" class="text-white text-[18px] md:text-[35px] leading-relaxed">
-            Lock & load for the ultimate all-out warfare experience. Fight in high-intensity infantry combat. Rip through the skies in aerial dogfights. Demolish your environment for a strategic advantage. In a war of tanks, fighter jets, and massive combat arsenals, your squad is the deadliest weapon. This is Battlefield 6.
+           
         </p>
     </div>
     <div class="swiperimg md:col-start-5 md:col-end-7 md:row-span-3 flex items-center justify-center" id="swipercard">
-        <img src="https://cdn.mos.cms.futurecdn.net/Y3Xj8yBRyr3jKkv8PnPTdf.jpg" alt="Battlefield 6" class="rounded-[15px] w-[250px] md:w-[350px] md:shadow-lg">
+        <img src="https://cdn.mos.cms.futurecdn.net/Y3Xj8yBRyr3jKkv8PnPTdf.jpg" alt="Battlefield 6" class="swip rounded-[15px] w-[250px] md:w-[350px] md:shadow-lg">
     </div>
 </div>
 
@@ -69,6 +64,6 @@
         </div>
         <h1 class="text-[20px] w-[20%]">ALL RIGHT ARE SAVE©2025</h1>
     </footer>
-    <script src="./scripts.js"></script>
+    <script src="./aff_game.js"></script>
 </body>
 </html>
