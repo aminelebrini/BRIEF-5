@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title id="gametitre"></title>
+</head>
+<body class="bg-[#151515] flex flex-col items-center justify-center">
+    <header class="flex flex-row items-center justify-between w-[100%] p-5">
+        <a class="text-white text-[30px] font-bold" href="index.html">NexPlay</a>
+        <div class="flex flex-row items-center justify-center text-white bg-[#302E2E] gap-2 p-3 rounded-[10px] hidden md:block">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search" class="outline-0 w-[300px]">
+        </div>
+        <div class="btn-header">
+            <button type="button" class="bg-white w-[40px] h-[40px] rounded-[50%] md:w-[50px] md:h-[50px]"><i class="fas fa-heart text-black text-[20px] md:text-[30px]"></i></button>
+            <button type="button" class="bg-white w-[40px] h-[40px] rounded-[50%] md:w-[50px] md:h-[50px]"><i class="fas fa-save text-black text-[20px] md:text-[30px]"></i></button>
+        </div>
+    </header>
+    <div id="slide1" class="minislide relative bg-cover bg-center w-full h-[88vh]">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <div class="relative z-20 flex flex-col md:flex-row items-center justify-between h-full px-[10%]">
+    <div class="text-section flex flex-col items-start justify-center w-full md:w-1/2 space-y-4">
+        <h1 id="titre" class="titre text-[35px] md:text-[85px] text-white font-bold uppercase"></h1>
+        <div id="icons" class="icons text-[25px] text-white space-x-3 md:text-[40px]">
+        </div>
+        <button type="button" id="explore" class="explore bg-white text-black font-semibold p-3 rounded-[10px] mt-[10px] hover:bg-gray-200 transition-all duration-200 md:w-[250px] md:h-[70px] md:text-[30px]">EXPLORE <i class="fas fa-arrow-right ml-2"></i></button>
+    </div>
+    <div class="gameimg flex flex-col items-center justify-center w-full md:w-1/2 mt-10 md:mt-0">
+        <img id="logoimg" src="" class="logoimg w-[100px] h-[300px] md:w-[250px] rounded-[15px] md:shadow-2xs" alt="imagelogo">
+        <div class="rate text-[#EBF70E] text-[22px] mt-2" id="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+    </div>
+  </div>
+</div>
+
+    <div class="about md:grid md:grid-cols-6 md:grid-rows-3 gap-[30px] p-6 md:p-12" id="about">
+        <div class="aboutext md:col-start-1 md:col-end-5 md:row-span-3 flex flex-col justify-center align-center">
+            <h1 class="text-white text-[30px] md:text-[70px] font-bold mb-4" id="about">ABOUT</h1>
+            <p id="introgame" class="text-white text-[18px] md:text-[35px] leading-relaxed"></p>
+        </div>
+        <div class="swiperimg md:col-start-5 md:col-end-7 md:row-span-3 flex items-center justify-center mt-[10%]" id="swipercard"></div>
+    </div>
+    <div class="gameinfo flex flex-col items-center justify-center gap-[20px]">
+        <div class="info-section flex flex-col gap-2 w-full md:w-2/3">
+            <h1 class="text-[#676363] text-[20px]">Platforms: <span id="platform" class="text-white text-[20px]"></span></h1>
+            <h1 class="text-[#676363] text-[20px]">Developer: <span id="developer" class="text-white text-[20px]"></span></h1>
+            <h1 class="text-[#676363] text-[20px]">Genre: <span id="genre" class="text-white text-[20px]"></span></h1>
+        </div>
+        <div class="info-section flex flex-col gap-2 w-full md:w-2/3">
+            <h1 class="text-[#676363] text-[20px]">Publisher: <span id="publisher" class="text-white text-[20px]"></span></h1>
+            <h1 class="text-[#676363] text-[20px]">Release Date: <span id="releasedate" class="text-white text-[20px]"></span></h1>
+        </div>
+    </div>
+    <div class="system">
+        <h1 class="text-[25px] text-white uppercase mt-2">System requirements for PC</h1>
+        <div class="prop flex flex-grid grid-cols-3 grid-rows-7 gap-4" id="prop">
+            <div class="game-requirement bg-[#202020] text-white p-4 rounded-[10px] w-[200px] h-[200px]">
+                <strong>OS:</strong> Windows 10
+            </div>
+            <div class="game-requirement bg-[#202020] text-white p-4 rounded-[10px] w-[200px] h-[200px]">
+                <strong>Processor:</strong> Intel i5
+            </div>
+            <div class="game-requirement bg-[#202020] text-white p-4 rounded-[10px] w-[200px] h-[200px]">
+                <strong>Memory:</strong> 8 GB RAM
+            </div>
+            <div class="game-requirement bg-[#202020] text-white p-4 rounded-[10px] w-[200px] h-[200px]">
+                <strong>Graphics:</strong> NVIDIA GTX 970
+            </div>
+            <div class="game-requirement bg-[#202020] text-white p-4 rounded-[10px] w-[200px] h-[200px]">
+                <strong>DirectX:</strong> Version 11
+            </div>
+            <div class="game-requirement bg-[#202020] text-white p-4 rounded-[10px] w-[200px] h-[200px]">
+                <strong>Storage:</strong> 50 GB available space
+            </div>
+            <div class="game-requirement bg-[#202020] text-white p-4 rounded-[10px] w-[200px] h-[200px]">
+                <strong>Sound Card:</strong> DirectX Compatible
+            </div>
+            <div class="game-requirement bg-[#202020] text-white p-4 rounded-[10px] w-[200px] h-[200px]">
+                <strong>Additional Notes:</strong> Requires internet connection
+            </div>
+        </div>
+
+    </div>
+    <footer id="footer">
+        <h1 class="text-[20px] w-[20%] font-bold">NexPlay</h1>
+        <div class="socialmedia w-[60%] flex flex-row items-center justify-center gap-3 text-[20px]">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-x-twitter"></i>
+            <i class="fab fa-discord"></i>
+        </div>
+        <h1 class="text-[15px] w-[20%]">ALL RIGHT ARE SAVE©2025</h1>
+    </footer>
+    <script src="./aff_game.js"></script>
+</body>
+</html>

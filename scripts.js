@@ -7,7 +7,9 @@ let slideImages = [
     "https://www.konami.com/efootball/s/img/main_page_1.png?v=856"
   ];
 
-const slideDiv = document.getElementById('slide');
+const slideDiv = document.getElementById('slide1');
+console.log(slideDiv);
+
 const displaycarte = document.getElementById('displaycartes');
 let i = 0;
 
@@ -18,7 +20,6 @@ function slidechange() {
         i = 0;
     }
 }
-
 slidechange();
 setInterval(slidechange, 2500);
 
@@ -33,6 +34,7 @@ async function fetchGames() {
 
     const allgame = data.results;
     displaydata(allgame);
+    events();
 
     // --- Filtrae par genre ---
     document.getElementById('genre').addEventListener('change', (e) => {
@@ -98,7 +100,6 @@ async function fetchGames() {
     console.error('Erreur lors de la récupération des jeux :', error);
   }
 }
-
 fetchGames();
 
 
@@ -113,8 +114,14 @@ fetchGames();
   }
   function displaydata(data)
   {
-    
-    const carte = document.createElement('div');
+    if(data.length == 0)
+    {
+      const loading = document.createElement('h1');
+      loading.textContent  = "Loading";
+      displaycarte.appendChild(loading);
+    }
+    else{
+      const carte = document.createElement('div');
     carte.id = 'carte';
     carte.className = "flex flex-wrap gap-4 justify-center";
     for(let i = 0 ; i < data.length; i++)
@@ -144,7 +151,7 @@ fetchGames();
             }
             else if(platformName.includes('nintendo'))
             {
-              iconClass = 'fas fa-nintendo';
+              iconClass = 'fab fa-nintendo';
             }
             else if(platformName.includes('android'))
             {
@@ -152,14 +159,17 @@ fetchGames();
             }
             else if(platformName.includes('ios'))
             {
-              iconClass = 'fab fa-iphone';
+              iconClass = 'fab fa-apple';
             }
         }
         carte.innerHTML += `
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
-                <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
+                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" 
+                data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
+                data-image="${game.background_image}" data-icons="${iconClass}" data-addBg="${game.background_image_additional}" data-url="${game.website}"
+                data-developer="${game.developers[0].name}" data-pub="${game.publishers[0].name}">${game.name}</button>
                 <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
@@ -167,10 +177,10 @@ fetchGames();
             </div>
          </div>
         `;
-    }
-
         displaycarte.appendChild(carte);
-  }
+      }
+    }
+}
 
 let n = 1;
 document.getElementById('btnext').addEventListener('click', ()=>{
@@ -182,6 +192,10 @@ document.getElementById('btnext').addEventListener('click', ()=>{
 document.getElementById('btnprevi').addEventListener('click', ()=>{
   window.location.href = "#section";
   n -= 1;
+  if(n <= 0)
+  {
+    n = 1;
+  }
   fetchNext(n);
 })
 //btn next and previous
@@ -199,12 +213,12 @@ async function fetchNext(n) {
     const allgame2 = data.results;
     //console.log(allgame2.length);
     nextDataRes(allgame2);
+    events();
   }catch(error)
   {
     console.error('Erreur lors du chargement de la page suivante :', error);
   }
 }
-
 function nextDataRes(next)
 {
     displaycarte.innerHTML = "";
@@ -250,14 +264,63 @@ function nextDataRes(next)
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
-                <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
+                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" 
+                data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
+                data-image="${game.background_image}"
+                data-addBg="${game.background_image_additional}" data-url="${game.website}" data-developer="${game.developers[0].name}" 
+                data-pub="${game.publishers[0].name}">${game.name}</button>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
+                <h2 class="text-[#676363] uppercase hidden font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.description}</span></h2>
             </div>
          </div>
         `;
-       
-    }
    displaycarte.appendChild(carte);
+  }
 }
+
+function events(){
+  const btns = carte.querySelectorAll('.game-name');
+  btns.forEach(btn=>{
+    btn.addEventListener('click', function() {
+        let Name = this.dataset.name;
+        let Released = this.dataset.released;
+        let Genre = this.dataset.genre;
+        let Rate = this.dataset.rating;
+        let Description = this.dataset.description;
+        let Image = this.dataset.image;
+        let Icon = this.dataset.icons;
+        let bgadd = this.dataset.addBg;
+        let website = this.dataset.url;
+        let Developer = this.dataset.developer;
+        let Publisher = this.dataset.pub;
+        //let Images;
+        localStorage.setItem('gamename', Name);
+        localStorage.setItem('gamereleased', Released);
+        localStorage.setItem('gamegenre', Genre);
+        localStorage.setItem('gamerating', Rate);
+        localStorage.setItem('gamedescription', Description);
+        localStorage.setItem('gameimage', Image);
+        localStorage.setItem('gameicons', Icon);
+        localStorage.setItem('gamebgadd', bgadd);
+        localStorage.setItem('gamewebsite', website);
+        localStorage.setItem('gamedeveloper', Developer);
+        localStorage.setItem('gamepublisher', Publisher);
+        todisplay(Name, Released, Genre, Rate, Description);
+        window.location.href = "aff_game.html";
+    });
+  })
+}
+
+function todisplay(name, released, genre, rating, Description) {
+  console.log("Nom :", name);
+  console.log("Date de sortie :", released);
+  console.log("Genre :", genre);
+  console.log("Note :", rating);
+  console.log("Description :", Description);
+
+}
+
+//le travail sur la page d'affichage 
