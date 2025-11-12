@@ -7,7 +7,9 @@ let slideImages = [
     "https://www.konami.com/efootball/s/img/main_page_1.png?v=856"
   ];
 
-const slideDiv = document.getElementById('slide');
+const slideDiv = document.getElementById('slide1');
+console.log(slideDiv);
+
 const displaycarte = document.getElementById('displaycartes');
 let i = 0;
 
@@ -18,7 +20,6 @@ function slidechange() {
         i = 0;
     }
 }
-
 slidechange();
 setInterval(slidechange, 2500);
 
@@ -99,7 +100,6 @@ async function fetchGames() {
     console.error('Erreur lors de la récupération des jeux :', error);
   }
 }
-
 fetchGames();
 
 
@@ -114,8 +114,14 @@ fetchGames();
   }
   function displaydata(data)
   {
-    
-    const carte = document.createElement('div');
+    if(data.length == 0)
+    {
+      const loading = document.createElement('h1');
+      loading.textContent  = "Loading";
+      displaycarte.appendChild(loading);
+    }
+    else{
+      const carte = document.createElement('div');
     carte.id = 'carte';
     carte.className = "flex flex-wrap gap-4 justify-center";
     for(let i = 0 ; i < data.length; i++)
@@ -160,7 +166,9 @@ fetchGames();
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
-                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}">${game.name}</button>
+                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" 
+                data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
+                data-image="${game.background_image}" data-icons="${iconClass}" data-addBg="${game.background_image_additional}" data-url="${game.website}">${game.name}</button>
                 <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
@@ -168,8 +176,9 @@ fetchGames();
             </div>
          </div>
         `;
-   displaycarte.appendChild(carte);
-  }
+        displaycarte.appendChild(carte);
+      }
+    }
 }
 
 let n = 1;
@@ -254,17 +263,19 @@ function nextDataRes(next)
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
-
-                <h1 id="name" class="text-white text-[22px] font-bold">${game.name}</h1>
-                <h1 class="text-white text-[22px] font-bold">${game.name}</h1>
-                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}">${game.name}</button>
+                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" 
+                data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
+                data-image="${game.background_image}"
+                data-addBg="${game.background_image_additional}" data-url="${game.website}">${game.name}</button>
+>>>>>>> c3566d9d1ed7fd122b828e87dad5c5ce3aac72e0
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
+                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
+                <h2 class="text-[#676363] uppercase hidden font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.description}</span></h2>
             </div>
          </div>
         `;
-          
    displaycarte.appendChild(carte);
   }
 }
@@ -277,19 +288,34 @@ function events(){
         let Released = this.dataset.released;
         let Genre = this.dataset.genre;
         let Rate = this.dataset.rating;
+        let Description = this.dataset.description;
+        let Image = this.dataset.image;
+        let Icon = this.dataset.icons;
+        let bgadd = this.dataset.addBg;
+        let website = this.dataset.url;
+        //let Images;
         localStorage.setItem('gamename', Name);
         localStorage.setItem('gamereleased', Released);
         localStorage.setItem('gamegenre', Genre);
         localStorage.setItem('gamerating', Rate);
-
-        todisplay(Name, Released, Genre, Rate);
+        localStorage.setItem('gamedescription', Description);
+        localStorage.setItem('gameimage', Image);
+        localStorage.setItem('gameicons', Icon);
+        localStorage.setItem('gamebgadd', bgadd);
+        localStorage.setItem('gamewebsite', website);
+        todisplay(Name, Released, Genre, Rate, Description);
+        window.location.href = "aff_game.html";
     });
   })
 }
 
-function todisplay(name, released, genre, rating) {
+function todisplay(name, released, genre, rating, Description) {
   console.log("Nom :", name);
   console.log("Date de sortie :", released);
   console.log("Genre :", genre);
   console.log("Note :", rating);
+  console.log("Description :", Description);
+
 }
+
+//le travail sur la page d'affichage 
