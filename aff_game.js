@@ -12,7 +12,7 @@ const Bgadd = localStorage.getItem('gamebgadd');
 const Website = localStorage.getItem('gamewebsite');
 const Developer = localStorage.getItem('gamedeveloper');
 const Publisher = localStorage.getItem('gamepublisher');
-const Requirement = localStorage.getItem('gamerequirement');
+// const Requirement = localStorage.getItem('gamerequirement');
 document.getElementById('titre').innerText = Name;
 document.querySelector('.logoimg').src = image;
 document.getElementById('slide1').style.backgroundImage = `url('${image}')`;
@@ -62,14 +62,13 @@ const proprities = document.getElementById('prop');
 //     proprities.appendChild(carte1);
 // }
 
-const os = document.getElementById("os");
-const processor = document.getElementById("processor");
-const memory = document.getElementById("memory");
-const graphics = document.getElementById("graphics");
-const directx = document.getElementById("directx");
-const storage = document.getElementById("storage");
-const soundcard = document.getElementById("soundcard");
-const notes = document.getElementById("notes");
+// const os = document.getElementById("os");
+// const processor = document.getElementById("processor");
+// const memory = document.getElementById("memory");
+// const graphics = document.getElementById("graphics");
+// const directx = document.getElementById("directx");
+// const storage = document.getElementById("storage");
+// const soundcard = document.getElementById("soundcard");
+// const notes = document.getElementById("notes");
 
-os.textContent = Requirement;
 
