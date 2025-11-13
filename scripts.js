@@ -166,10 +166,10 @@ fetchGames();
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
-                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" 
+                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-id="${game.id}" data-name="${game.name}" 
                 data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
                 data-image="${game.background_image}" data-icons="${iconClass}" data-addBg="${game.background_image_additional}" data-url="${game.website}"
-                data-developer="${game.developers[0].name}" data-pub="${game.publishers[0].name}" data-requirement="${game.requirements}">${game.name}</button>
+                data-developer="${game.developers[0].name}" data-pub="${game.publishers[0].name}" data-comments="${game.reviews_text}">${game.name}</button>
                 <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
@@ -264,11 +264,11 @@ function nextDataRes(next)
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
             <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
             <div class="p-2">
-                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" 
+                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-id="${game.id}" data-name="${game.name}" 
                 data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
                 data-image="${game.background_image}"
                 data-addBg="${game.background_image_additional}" data-url="${game.website}" data-developer="${game.developers[0].name}" 
-                data-pub="${game.publishers[0].name}" data-requirement="${game.requirements}">${game.name}</button>
+                data-pub="${game.publishers[0].name}" data-comments="${game.reviews}">${game.name}</button>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
@@ -285,6 +285,7 @@ function events(){
   const btns = carte.querySelectorAll('.game-name');
   btns.forEach(btn=>{
     btn.addEventListener('click', function() {
+        let Id = this.dataset.id;
         let Name = this.dataset.name;
         let Released = this.dataset.released;
         let Genre = this.dataset.genre;
@@ -296,8 +297,9 @@ function events(){
         let website = this.dataset.url;
         let Developer = this.dataset.developer;
         let Publisher = this.dataset.pub;
-        let Requirement = this.dataset.requirement;
+        let Comments = this.dataset.comments;
         //let Images;
+        localStorage.setItem('gameid', Id);
         localStorage.setItem('gamename', Name);
         localStorage.setItem('gamereleased', Released);
         localStorage.setItem('gamegenre', Genre);
@@ -309,19 +311,21 @@ function events(){
         localStorage.setItem('gamewebsite', website);
         localStorage.setItem('gamedeveloper', Developer);
         localStorage.setItem('gamepublisher', Publisher);
-        localStorage.setItem('gamerequirement', Requirement);
-        todisplay(Name, Released, Genre, Rate, Description);
-        window.location.href = "aff_game.html";
+        localStorage.setItem('gamecomments', Comments);
+        todisplay(Name, Released, Genre, Rate, Description, Comments, Id);
+        //window.location.href = "aff_game.html";
     });
   })
 }
 
-function todisplay(name, released, genre, rating, Description) {
+function todisplay(name, released, genre, rating, Description, Comments, id) {
   console.log("Nom :", name);
   console.log("Date de sortie :", released);
   console.log("Genre :", genre);
   console.log("Note :", rating);
   console.log("Description :", Description);
+  console.log("Comments :", Comments);
+  console.log("id :", id);
 
 }
 
