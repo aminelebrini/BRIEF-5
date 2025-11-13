@@ -142,7 +142,6 @@ function displaydata(data) {
     } else if (game.genres && game.genres.length > 0) {
       genre = game.genres[0].name;
     }
-
     if (game.platforms && game.platforms.length > 0) {
       platformName = game.platforms[0].platform.name.toLowerCase();
       if (platformName.includes('pc')) iconClass = 'fa-brands fa-windows';
@@ -151,10 +150,111 @@ function displaydata(data) {
       else if (platformName.includes('nintendo')) iconClass = 'fab fa-nintendo';
       else if (platformName.includes('android')) iconClass = 'fab fa-android';
       else if (platformName.includes('ios')) iconClass = 'fab fa-apple';
+
+    else{
+      const carte = document.createElement('div');
+    carte.id = 'carte';
+    carte.className = "flex flex-wrap gap-4 justify-center";
+    for(let i = 0 ; i < data.length; i++)
+    {
+        //console.log(data.length);
+        let game = data[i];
+        let iconClass = '';
+        let platformName = 'Unknown';
+        let genre = 'Unknown';
+        if (game.genre !== undefined && game.genre !== null) {
+              genre = game.genre;
+          } 
+          else if (game.genres !== undefined && game.genres.length > 0) {
+              genre = game.genres[0].name;
+          }
+        if (game.platforms && game.platforms.length > 0) {
+            platformName = game.platforms[0].platform.name.toLowerCase();
+            if(platformName.includes('pc'))
+            {
+              iconClass = 'fa-brands fa-windows';
+            }else if(platformName.includes('playstation'))
+            {
+              iconClass = 'fab fa-playstation';
+            }else if(platformName.includes('xbox'))
+            {
+              iconClass = 'fab fa-xbox';
+            }
+            else if(platformName.includes('nintendo'))
+            {
+              iconClass = 'fab fa-nintendo';
+            }
+            else if(platformName.includes('android'))
+            {
+              iconClass = 'fab fa-android';
+            }
+            else if(platformName.includes('ios'))
+            {
+              iconClass = 'fab fa-apple';
+            }
+        }
+        carte.innerHTML += `
+         <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
+  <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
+
+  <div class="p-2 relative">
+    <button 
+      type="button" 
+      class="game-name text-white text-[22px] text-left font-bold cursor-pointer" 
+      data-id="${game.id}" 
+      data-name="${game.name}" 
+      data-released="${game.released}" 
+      data-genre="${genre}" 
+      data-rating="${game.rating}" 
+      data-description="${game.description}" 
+      data-image="${game.background_image}" 
+      data-icons="${iconClass}" 
+      data-addBg="${game.background_image_additional}" 
+      data-url="${game.website}"
+      data-developer="${game.developers[0].name}" 
+      data-pub="${game.publishers[0].name}" 
+      data-comments="${game.reviews_text}">
+      ${game.name}
+    </button>
+
+    <button id="favorite-btn" class="favorite-btn text-[20px] text-white" 
+    data-id="${game.id}" 
+      data-name="${game.name}" 
+      data-released="${game.released}" 
+      data-genre="${genre}" 
+      data-rating="${game.rating}" 
+      data-description="${game.description}" 
+      data-image="${game.background_image}" 
+      data-addBg="${game.background_image_additional}" 
+      data-url="${game.website}"
+      data-developer="${game.developers[0].name}" 
+      data-pub="${game.publishers[0].name}" 
+      data-comments="${game.reviews_text}">
+      <i id="iconFav" class="fa-regular fa-heart"></i>
+    </button>
+
+    <h2 class="text-white font-bold">
+      <i class="${iconClass} text-white text-[20px] p-2"></i>
+    </h2>
+
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Release date: <span class="date text-white">${game.released}</span>
+    </h2>
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Genres: <span class="date text-white">${genre}</span>
+    </h2>
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Rating: <span class="date text-white">${game.rating}</span>
+    </h2>
+  </div>
+</div>
+
+        `;
+        displaycarte.appendChild(carte);
+      }
     }
 
     const isFav = FavList.some(f => f.id === game.id);
-    
     const heartClass = isFav ? 'fa-solid text-[#EBF70E]' : 'fa-regular text-white';
 
     carte.innerHTML += `
@@ -400,6 +500,10 @@ function todisplay(name, released, genre, rating, Description, Comments, id) {
 
 }
 document.addEventListener('click', (e) => {
+  const Fav = document.getElementById('favorite-btn');
+  const icon = document.getElementById('iconFav');
+
+  const btn = document.addEventListener('click', (e) => {
   const favBtn = e.target.closest('.favorite-btn');
   if (!favBtn) return;
 
@@ -409,6 +513,14 @@ document.addEventListener('click', (e) => {
 
   const gameData = {
     id: parseInt(dataset.id),
+  icon.classList.toggle('fa-solid');
+  icon.classList.toggle('fa-regular');
+  icon.classList.toggle('text-[#EBF70E]');
+
+  const dataset = favBtn.dataset;
+
+  const gameData = {
+    id: dataset.id,
     name: dataset.name,
     released: dataset.released,
     genre: dataset.genre,
@@ -437,6 +549,11 @@ document.addEventListener('click', (e) => {
   }
 
   localStorage.setItem('gamefav', JSON.stringify(FavList));
+    comments: dataset.comments
+  };
+  FavList.push(gameData);
+  console.log(FavList);
+  localStorage.setItem('gamefav', FavList);
 });
 
 
