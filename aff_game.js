@@ -14,6 +14,7 @@ const Website = localStorage.getItem('gamewebsite');
 const Developer = localStorage.getItem('gamedeveloper');
 const Publisher = localStorage.getItem('gamepublisher');
 // const Requirement = localStorage.getItem('gamerequirement');
+document.getElementById('gametitre').innerText = Name;
 document.getElementById('titre').innerText = Name;
 document.querySelector('.logoimg').src = image;
 document.getElementById('slide1').style.backgroundImage = `url('${image}')`;
