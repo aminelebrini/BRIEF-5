@@ -1,6 +1,7 @@
 const footer = document.getElementById('footer');
 footer.style.display = 'flex';
 footer.className = "bg-[#FFFFFF] w-full flex flex-row items-center justify-around p-5";
+const Id = localStorage.getItem('gameid');
 const Name = localStorage.getItem('gamename');
 const Release = localStorage.getItem('gamereleased');
 const Genre = localStorage.getItem('gamegenre');

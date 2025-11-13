@@ -7,6 +7,7 @@ let slideImages = [
     "https://www.konami.com/efootball/s/img/main_page_1.png?v=856"
   ];
 
+let FavList = [];
 const slideDiv = document.getElementById('slide1');
 console.log(slideDiv);
 
@@ -164,18 +165,60 @@ fetchGames();
         }
         carte.innerHTML += `
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
-            <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
-            <div class="p-2">
-                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-id="${game.id}" data-name="${game.name}" 
-                data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
-                data-image="${game.background_image}" data-icons="${iconClass}" data-addBg="${game.background_image_additional}" data-url="${game.website}"
-                data-developer="${game.developers[0].name}" data-pub="${game.publishers[0].name}" data-comments="${game.reviews_text}">${game.name}</button>
-                <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
-            </div>
-         </div>
+  <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
+
+  <div class="p-2 relative">
+    <button 
+      type="button" 
+      class="game-name text-white text-[22px] text-left font-bold cursor-pointer" 
+      data-id="${game.id}" 
+      data-name="${game.name}" 
+      data-released="${game.released}" 
+      data-genre="${genre}" 
+      data-rating="${game.rating}" 
+      data-description="${game.description}" 
+      data-image="${game.background_image}" 
+      data-icons="${iconClass}" 
+      data-addBg="${game.background_image_additional}" 
+      data-url="${game.website}"
+      data-developer="${game.developers[0].name}" 
+      data-pub="${game.publishers[0].name}" 
+      data-comments="${game.reviews_text}">
+      ${game.name}
+    </button>
+
+    <button id="favorite-btn" class="favorite-btn text-[20px] text-white" 
+    data-id="${game.id}" 
+      data-name="${game.name}" 
+      data-released="${game.released}" 
+      data-genre="${genre}" 
+      data-rating="${game.rating}" 
+      data-description="${game.description}" 
+      data-image="${game.background_image}" 
+      data-addBg="${game.background_image_additional}" 
+      data-url="${game.website}"
+      data-developer="${game.developers[0].name}" 
+      data-pub="${game.publishers[0].name}" 
+      data-comments="${game.reviews_text}">
+      <i id="iconFav" class="fa-regular fa-heart"></i>
+    </button>
+
+    <h2 class="text-white font-bold">
+      <i class="${iconClass} text-white text-[20px] p-2"></i>
+    </h2>
+
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Release date: <span class="date text-white">${game.released}</span>
+    </h2>
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Genres: <span class="date text-white">${genre}</span>
+    </h2>
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Rating: <span class="date text-white">${game.rating}</span>
+    </h2>
+  </div>
+</div>
+
         `;
         displaycarte.appendChild(carte);
       }
@@ -262,20 +305,56 @@ function nextDataRes(next)
       // }
       carte.innerHTML += `
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
-            <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
-            <div class="p-2">
-                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-id="${game.id}" data-name="${game.name}" 
-                data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
-                data-image="${game.background_image}"
-                data-addBg="${game.background_image_additional}" data-url="${game.website}" data-developer="${game.developers[0].name}" 
-                data-pub="${game.publishers[0].name}" data-comments="${game.reviews}">${game.name}</button>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
-                <h2 class="text-[#676363] uppercase hidden font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.description}</span></h2>
-            </div>
-         </div>
+  <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
+
+  <div class="p-2 relative">
+    <button 
+      type="button" 
+      class="game-name text-white text-[22px] font-bold text-left cursor-pointer" 
+      data-id="${game.id}" 
+      data-name="${game.name}" 
+      data-released="${game.released}" 
+      data-genre="${genre}" 
+      data-rating="${game.rating}" 
+      data-description="${game.description}" 
+      data-image="${game.background_image}" 
+      data-addBg="${game.background_image_additional}" 
+      data-url="${game.website}"
+      data-developer="${game.developers[0].name}" 
+      data-pub="${game.publishers[0].name}" 
+      data-comments="${game.reviews_text}">
+      ${game.name}
+    </button>
+
+    <button id="favorite-btn" class="favorite-btn text-[20px] text-white" 
+    data-id="${game.id}" 
+      data-name="${game.name}" 
+      data-released="${game.released}" 
+      data-genre="${genre}" 
+      data-rating="${game.rating}" 
+      data-description="${game.description}" 
+      data-image="${game.background_image}" 
+      data-addBg="${game.background_image_additional}" 
+      data-url="${game.website}"
+      data-developer="${game.developers[0].name}" 
+      data-pub="${game.publishers[0].name}" 
+      data-comments="${game.reviews_text}">
+      ${game.name}
+    >
+      <i id="iconFav" class="fa-regular fa-heart"></i>
+    </button>
+
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Release date: <span class="date text-white">${game.released}</span>
+    </h2>
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Genres: <span class="date text-white">${genre}</span>
+    </h2>
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Rating: <span class="date text-white">${game.rating}</span>
+    </h2>
+  </div>
+</div>
         `;
    displaycarte.appendChild(carte);
   }
@@ -313,7 +392,7 @@ function events(){
         localStorage.setItem('gamepublisher', Publisher);
         localStorage.setItem('gamecomments', Comments);
         todisplay(Name, Released, Genre, Rate, Description, Comments, Id);
-        //window.location.href = "aff_game.html";
+        window.location.href = "aff_game.html";
     });
   })
 }
@@ -328,5 +407,38 @@ function todisplay(name, released, genre, rating, Description, Comments, id) {
   console.log("id :", id);
 
 }
+  const Fav = document.getElementById('favorite-btn');
+  const icon = document.getElementById('iconFav');
 
-//le travail sur la page d'affichage 
+  const btn = document.addEventListener('click', (e) => {
+  const favBtn = e.target.closest('.favorite-btn');
+  if (!favBtn) return;
+
+  const icon = favBtn.querySelector('i');
+  icon.classList.toggle('fa-solid');
+  icon.classList.toggle('fa-regular');
+  icon.classList.toggle('text-[#EBF70E]');
+
+  const dataset = favBtn.dataset;
+
+  const gameData = {
+    id: dataset.id,
+    name: dataset.name,
+    released: dataset.released,
+    genre: dataset.genre,
+    rating: dataset.rating,
+    description: dataset.description,
+    image: dataset.image,
+    icons: dataset.icons,
+    addbg: dataset.addbg,
+    url: dataset.url,
+    developer: dataset.developer,
+    publisher: dataset.pub,
+    comments: dataset.comments
+  };
+  FavList.push(gameData);
+  console.log(FavList);
+  localStorage.setItem('gamefav', FavList);
+});
+
+
