@@ -12,6 +12,7 @@ const Bgadd = localStorage.getItem('gamebgadd');
 const Website = localStorage.getItem('gamewebsite');
 const Developer = localStorage.getItem('gamedeveloper');
 const Publisher = localStorage.getItem('gamepublisher');
+const Requirement = localStorage.getItem('gamerequirement');
 document.getElementById('titre').innerText = Name;
 document.querySelector('.logoimg').src = image;
 document.getElementById('slide1').style.backgroundImage = `url('${image}')`;
@@ -69,4 +70,6 @@ const directx = document.getElementById("directx");
 const storage = document.getElementById("storage");
 const soundcard = document.getElementById("soundcard");
 const notes = document.getElementById("notes");
+
+os.textContent = Requirement;
 
