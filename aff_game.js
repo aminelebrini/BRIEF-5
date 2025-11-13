@@ -1,6 +1,7 @@
 const footer = document.getElementById('footer');
 footer.style.display = 'flex';
 footer.className = "bg-[#FFFFFF] w-full flex flex-row items-center justify-around p-5";
+const Id = localStorage.getItem('gameid');
 const Name = localStorage.getItem('gamename');
 const Release = localStorage.getItem('gamereleased');
 const Genre = localStorage.getItem('gamegenre');
@@ -13,6 +14,7 @@ const Website = localStorage.getItem('gamewebsite');
 const Developer = localStorage.getItem('gamedeveloper');
 const Publisher = localStorage.getItem('gamepublisher');
 // const Requirement = localStorage.getItem('gamerequirement');
+document.getElementById('gametitre').innerText = Name;
 document.getElementById('titre').innerText = Name;
 document.querySelector('.logoimg').src = image;
 document.getElementById('slide1').style.backgroundImage = `url('${image}')`;
