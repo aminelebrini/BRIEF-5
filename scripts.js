@@ -129,7 +129,7 @@ function displaydata(data) {
 
   const carte = document.createElement('div');
   carte.id = 'carte';
-  carte.className = "flex flex-wrap gap-4 justify-center";
+  carte.className = "carte flex flex-wrap gap-4 justify-center";
 
   for (let i = 0; i < data.length; i++) {
     let game = data[i];
@@ -258,7 +258,7 @@ function nextDataRes(next)
 
     let FavList = JSON.parse(localStorage.getItem('gamefav')) || [];
     const carte = document.createElement('div');
-    carte.className = "flex flex-wrap gap-4 justify-center";
+    carte.className = "carte flex flex-wrap gap-4 justify-center";
     carte.id = "carte";
 
     for(let i = 0; i < next.length; i++)
@@ -438,5 +438,25 @@ document.addEventListener('click', (e) => {
 
   localStorage.setItem('gamefav', JSON.stringify(FavList));
 });
+const searchInput = document.getElementById('search');
+const displayContainer = document.getElementById('displaycartes');
 
+searchInput.addEventListener('input', ()=>{
+  const Searchvalue = searchInput.value.trim().toLowerCase();
 
+  const cards = displayContainer.querySelectorAll('#carte > div');
+  cards.forEach(card =>{
+    const GameNameEl = card.querySelector('.game-name');
+    if(!GameNameEl)
+    {
+      return;
+    }
+    const GameName = GameNameEl.textContent.toLowerCase();
+    if(GameName.includes(Searchvalue))
+    {
+      card.style.display = 'flex flex-col'; 
+    } else {
+      card.style.display = 'none';
+     }
+  });
+});
