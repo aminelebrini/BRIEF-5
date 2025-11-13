@@ -168,7 +168,8 @@ fetchGames();
             <div class="p-2">
                 <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" 
                 data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
-                data-image="${game.background_image}" data-icons="${iconClass}" data-addBg="${game.background_image_additional}" data-url="${game.website}">${game.name}</button>
+                data-image="${game.background_image}" data-icons="${iconClass}" data-addBg="${game.background_image_additional}" data-url="${game.website}"
+                data-developer="${game.developers[0].name}" data-pub="${game.publishers[0].name}">${game.name}</button>
                 <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
@@ -266,8 +267,8 @@ function nextDataRes(next)
                 <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-name="${game.name}" 
                 data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
                 data-image="${game.background_image}"
-                data-addBg="${game.background_image_additional}" data-url="${game.website}">${game.name}</button>
->>>>>>> c3566d9d1ed7fd122b828e87dad5c5ce3aac72e0
+                data-addBg="${game.background_image_additional}" data-url="${game.website}" data-developer="${game.developers[0].name}" 
+                data-pub="${game.publishers[0].name}">${game.name}</button>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
@@ -293,6 +294,8 @@ function events(){
         let Icon = this.dataset.icons;
         let bgadd = this.dataset.addBg;
         let website = this.dataset.url;
+        let Developer = this.dataset.developer;
+        let Publisher = this.dataset.pub;
         //let Images;
         localStorage.setItem('gamename', Name);
         localStorage.setItem('gamereleased', Released);
@@ -303,6 +306,8 @@ function events(){
         localStorage.setItem('gameicons', Icon);
         localStorage.setItem('gamebgadd', bgadd);
         localStorage.setItem('gamewebsite', website);
+        localStorage.setItem('gamedeveloper', Developer);
+        localStorage.setItem('gamepublisher', Publisher);
         todisplay(Name, Released, Genre, Rate, Description);
         window.location.href = "aff_game.html";
     });
