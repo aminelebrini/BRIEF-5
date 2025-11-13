@@ -164,18 +164,49 @@ fetchGames();
         }
         carte.innerHTML += `
          <div class="w-[300px] bg-[#202020] rounded-[10px] mt-[5%]">
-            <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
-            <div class="p-2">
-                <button type="button" class="game-name text-white text-[22px] font-bold cursor-pointer" data-id="${game.id}" data-name="${game.name}" 
-                data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
-                data-image="${game.background_image}" data-icons="${iconClass}" data-addBg="${game.background_image_additional}" data-url="${game.website}"
-                data-developer="${game.developers[0].name}" data-pub="${game.publishers[0].name}" data-comments="${game.reviews_text}">${game.name}</button>
-                <h2 class="text-white font-bold"><i class="${iconClass} text-white text-[20px] p-2"></i></h2>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
-                <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
-            </div>
-         </div>
+  <img src="${game.background_image}" class="rounded-[10px] rounded-b-[0px] w-[300px] h-[200px]"/>
+
+  <div class="p-2 relative">
+    <button 
+      type="button" 
+      class="game-name text-white text-[22px] font-bold cursor-pointer" 
+      data-id="${game.id}" 
+      data-name="${game.name}" 
+      data-released="${game.released}" 
+      data-genre="${genre}" 
+      data-rating="${game.rating}" 
+      data-description="${game.description}" 
+      data-image="${game.background_image}" 
+      data-icons="${iconClass}" 
+      data-addBg="${game.background_image_additional}" 
+      data-url="${game.website}"
+      data-developer="${game.developers[0].name}" 
+      data-pub="${game.publishers[0].name}" 
+      data-comments="${game.reviews_text}">
+      ${game.name}
+    </button>
+
+    <!-- ❤️ Icône favoris -->
+    <button class="favorite-btn absolute top-2 right-2 text-white text-[22px]" data-id="${game.id}" title="Ajouter aux favoris">
+      <i class="fa-regular fa-heart"></i>
+    </button>
+
+    <h2 class="text-white font-bold">
+      <i class="${iconClass} text-white text-[20px] p-2"></i>
+    </h2>
+
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Release date: <span class="date text-white">${game.released}</span>
+    </h2>
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Genres: <span class="date text-white">${genre}</span>
+    </h2>
+    <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">
+      Rating: <span class="date text-white">${game.rating}</span>
+    </h2>
+  </div>
+</div>
+
         `;
         displaycarte.appendChild(carte);
       }
