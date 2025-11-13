@@ -1,95 +1,103 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <title>NexPlay</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>NexPlay</title>
 </head>
+
 <body class="bg-[#151515] flex flex-col items-center justify-center">
-    <header class="flex flex-row items-center justify-between w-[100%] p-5">
-        <h1 class="text-white text-[30px] font-bold">NexPlay</h1>
-        <div class="flex flex-row items-center justify-center text-white bg-[#302E2E] gap-2 p-3 rounded-[10px] hidden md:block">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search" class="outline-0 w-[300px]">
-        </div>
-        <div class="btn-header">
-            <button type="button" class="bg-white w-[40px] h-[40px] rounded-[50%] md:w-[50px] md:h-[50px]"><i class="fas fa-heart text-black text-[20px] md:text-[30px]"></i></button>
-            <button type="button" class="bg-white w-[40px] h-[40px] rounded-[50%] md:w-[50px] md:h-[50px]"><i class="fas fa-save text-black text-[20px] md:text-[30px]"></i></button>
-        </div>
-    </header>
-    <div id="slide1" class="slide1 w-full h-[88vh] bg-cover bg-center transition-all duration-500">
-        <div class="dark w-full h-[88vh] bg-black opacity-[50%] z-10"></div>
-        <div class="titles absolute top-[30%] left-[10%] w-[80%] h-[40%]">
-            <h2 class="txt1 text-white z-10 text-[40px] md:text-[65px]">Level up your play.</h2>
-            <h3 class="txt2 text-white z-10 text-[40px] md:text-[70px] font-bold">Welcome to NexPlay.</h3>
-            <div class="explore z-10">
-                <button type="button" onclick="clickTodisplay()" class="bg-transparent border-white border-3 rounded-[15px] w-[200px] h-[70px] z-10 align-center text-[30px] text-white absolute top-[100%] left-[20%] font-medium hover:bg-white hover:text-black transition-all duration-500">Explore Now</button>
-            </div>
-        </div>
+  <header class="flex flex-row md:flex-row items-center justify-between w-full p-5 gap-4 md:gap-0">
+    <h1 class="text-white text-[30px] font-bold">NexPlay</h1>
+    <div class="flex flex-row gap-2">
+      <button type="button" class="bg-white w-[40px] h-[40px] rounded-full md:w-[50px] md:h-[50px] flex items-center justify-center">
+        <a href="favoris.html"><i class="fas fa-heart text-black text-[20px] md:text-[30px]"></i></a>
+      </button>
+      <button type="button" class="bg-white w-[40px] h-[40px] rounded-full md:w-[50px] md:h-[50px] flex items-center justify-center">
+        <i class="fas fa-sun text-black text-[20px] md:text-[30px]"></i>
+      </button>
+    </div>
+  </header>
+
+  <div id="slide1" class="slide1 w-full h-[80vh] sm:h-[85vh] md:h-[88vh] bg-cover bg-center relative">
+    <div class="dark absolute inset-0 bg-black opacity-50 z-10"></div>
+    <div class="titles absolute top-[25%] left-[5%] sm:left-[10%] w-[90%] sm:w-[80%] z-10">
+      <h2 class="txt1 text-white z-10 text-[30px] sm:text-[45px] md:text-[65px]">Level up your play.</h2>
+      <h3 class="txt2 text-white z-10 text-[35px] sm:text-[50px] md:text-[70px] font-bold">Welcome to NexPlay.</h3>
+      <div class="explore mt-4 sm:mt-6">
+        <button type="button" onclick="clickTodisplay()" class="bg-transparent border-white border-2 rounded-[15px] w-[150px] sm:w-[180px] mt-[20%] md:mt-[0%] ml-[25%] md:ml-[42%] md:w-[200px] h-[55px] sm:h-[60px] md:h-[70px] text-[20px] sm:text-[25px] md:text-[30px] text-white font-medium hover:bg-white hover:text-black transition-all duration-500">
+          Explore Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="section" class="section w-full mt-[2%] flex flex-col items-center justify-center">
+    <div class="w-full flex items-center justify-center text-center px-2">
+      <h1 class="text-white text-[35px] sm:text-[45px] md:text-[60px] font-bold">New and trending</h1>
     </div>
 
-    <div class="section w-full mt-[2%] flex flex-col items-center justify-center hidden align-center" id="section">
-        <div class="w-full flex flex-row items-center justify-center">
-            <h1 class="text-white text-[60px] font-bold ">New and trending</h1>
-        </div>
-        <div id="filtres" class="filtres mt-[4%] flex flex-row items-center justify-evenly gap-2 w-full">
-            <select id="genre" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
-                <option value="genre" class="text-black text-[20px]">Genre</option>
-                <option value="All" class="text-black text-[20px]">All</option>
-                <option value="Action" class="text-black text-[20px]">Action</option>
-                <option value="Strategy" class="text-black text-[20px]">Strategy</option>
-                <option value="Adventure" class="text-black text-[20px]">Adventure</option>
-                <option value="Sports" class="text-black text-[20px]">Sports</option>
-            </select>
-            <!--2-->
-            <select id="platformes" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
-                <option class="text-black text-[20px] disbled">Platforms</option>
-                <option value="All" class="text-black text-[20px]">All Platforms</option>
-                <option value="PC" class="text-black text-[20px]">PC</option>
-                <option value="PlayStation" class="text-black text-[20px]">PlayStation 4</option>
-                <option value="Xbox" class="text-black text-[20px]">Xbox One</option>
-                <option value="iOS" class="text-black text-[20px]">iOS</option>
-                <option value="Android" class="text-black text-[20px]">Android</option>
-            </select>
-            <!--3-->
-            <select id="Notes" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
-                <option value="Notes" class="text-black text-[20px] disabled">Notes</option>
-                <option value="All" class="text-black text-[20px]">All Notes</option>
-                <option value="recommended" class="text-black text-[20px]">recommended</option>
-                <option value="exceptional" class="text-black text-[20px]">Exceptional</option>
-                <option value="meh" class="text-black text-[20px]">Meh</option>
-                <option value="skip" class="text-black text-[20px]">skip</option>
-            </select>
-            <!-- <select id="affichageN" class="border-white text-white border-2 rounded-[10px] w-[300px] h-[50px] text-[20px]">
-                <option value="Notes" class="text-black text-[20px]">number of cards to display</option>
-                <option value="12" class="text-black text-[20px]">12</option>
-                <option value="24" class="text-black text-[20px]">24</option>
-                <option value="36" class="text-black text-[20px]">36</option>
-                <option value="48" class="text-black text-[20px]">48</option>
-                <option value="60" class="text-black text-[20px]">60</option>
-                <option value="72" class="text-black text-[20px]">72</option>
-                <option value="84" class="text-black text-[20px]">84</option>
-            </select> -->
-        </div>
-        <div class="displaycartes h-full w-full flex flex-wrap gap-1 p-5" id="displaycartes"></div>
-        <div class="btnexplore w-[100%] h-[90px] flex flex-row items-center justify-center gap-[45px]">
-            <button type="button" id="btnprevi" class="bg-white w-[150px] h-[60px] rounded-[10px] text-[20px] font-bold"><i class="fas fa-arrow-left"></i> Previous</button>
-            <button type="button" id="btnext" class="bg-white w-[150px] h-[60px] rounded-[10px] text-[20px] font-bold">Next <i class="fas fa-arrow-right"></i></button>
-        </div>
+    <div id="filtres" class="filtres mt-[4%] flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 w-full px-4">
+      <select id="genre" class="border-white text-white border-2 rounded-[10px] w-[90%] sm:w-[250px] md:w-[300px] h-[45px] sm:h-[50px] text-[18px] sm:text-[20px] bg-transparent">
+        <option value="genre" class="text-black">Genre</option>
+        <option value="All" class="text-black">All</option>
+        <option value="Action" class="text-black">Action</option>
+        <option value="Strategy" class="text-black">Strategy</option>
+        <option value="Adventure" class="text-black">Adventure</option>
+        <option value="Sports" class="text-black">Sports</option>
+      </select>
+
+      <select id="platformes" class="border-white text-white border-2 rounded-[10px] w-[90%] sm:w-[250px] md:w-[300px] h-[45px] sm:h-[50px] text-[18px] sm:text-[20px] bg-transparent">
+        <option class="text-black">Platforms</option>
+        <option value="All" class="text-black">All Platforms</option>
+        <option value="PC" class="text-black">PC</option>
+        <option value="PlayStation" class="text-black">PlayStation 4</option>
+        <option value="Xbox" class="text-black">Xbox One</option>
+        <option value="iOS" class="text-black">iOS</option>
+        <option value="Android" class="text-black">Android</option>
+      </select>
+
+      <select id="Notes" class="border-white text-white border-2 rounded-[10px] w-[90%] sm:w-[250px] md:w-[300px] h-[45px] sm:h-[50px] text-[18px] sm:text-[20px] bg-transparent">
+        <option value="Notes" class="text-black">Notes</option>
+        <option value="All" class="text-black">All Notes</option>
+        <option value="recommended" class="text-black">Recommended</option>
+        <option value="exceptional" class="text-black">Exceptional</option>
+        <option value="meh" class="text-black">Meh</option>
+        <option value="skip" class="text-black">Skip</option>
+      </select>
     </div>
-    <footer id="footer" class="hidden">
-        <h1 class="text-[30px] w-[20%] font-bold">NexPlay</h1>
-        <div class="socialmedia w-[60%] flex flex-row items-center justify-center gap-3 text-[30px]">
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-x-twitter"></i>
-            <i class="fab fa-discord"></i>
-        </div>
-        <h1 class="text-[20px] w-[20%]">ALL RIGHT ARE SAVE©2025</h1>
-    </footer>
-    <script src="./scripts.js"></script>
+    <div class="padding flex flex-row items-center justify-center h-[100px]">
+        <div class="flex flex-row items-center mt-[40px] md:mt-[100px] justify-center text-white bg-[#302E2E] gap-2 p-3 rounded-[10px] md:w-[50%] sm:w-[70%] md:w-auto">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search" id="search" class="outline-0 w-full md:w-[300px] bg-transparent">
+    </div>
+    </div>
+    <div id="displaycartes" class="displaycartes w-full flex flex-wrap gap-3 p-4 justify-center"></div>
+
+    <div class="btnexplore w-full h-[90px] flex flex-row items-center justify-center gap-6 flex-wrap">
+      <button type="button" id="btnprevi" class="bg-white w-[130px] sm:w-[150px] h-[50px] sm:h-[60px] rounded-[10px] text-[18px] sm:text-[20px] font-bold">
+        <i class="fas fa-arrow-left"></i> Previous
+      </button>
+      <button type="button" id="btnext" class="bg-white w-[130px] sm:w-[150px] h-[50px] sm:h-[60px] rounded-[10px] text-[18px] sm:text-[20px] font-bold">
+        Next <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <footer id="footer" class="hidden flex-col sm:flex-row items-center justify-between w-full p-5 text-white text-center sm:text-left">
+    <h1 class="text-[18px] sm:text-[20px] font-bold mb-2 sm:mb-0">NexPlay</h1>
+    <div class="socialmedia flex flex-row items-center justify-center gap-4 text-[18px] sm:text-[20px]">
+      <i class="fab fa-facebook"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-x-twitter"></i>
+      <i class="fab fa-discord"></i>
+    </div>
+    <h1 class="text-[13px] sm:text-[15px] mt-2 sm:mt-0">ALL RIGHTS RESERVED ©2025</h1>
+  </footer>
+
+  <script src="./scripts.js"></script>
 </body>
 </html>
