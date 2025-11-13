@@ -268,7 +268,7 @@ function nextDataRes(next)
                 data-released="${game.released}" data-genre="${genre}" data-rating="${game.rating}" data-description="${game.description}" 
                 data-image="${game.background_image}"
                 data-addBg="${game.background_image_additional}" data-url="${game.website}" data-developer="${game.developers[0].name}" 
-                data-pub="${game.publishers[0].name}" data-comments="${game.reviews}">${game.name}</button>
+                data-pub="${game.publishers.name}" data-comments="${game.reviews}">${game.name}</button>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Release date: <span class="date text-white">${game.released}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Genres: <span class="date text-white">${genre}</span></h2>
                 <h2 class="text-[#676363] uppercase font-bold flex flex-row justify-between">Rating: <span class="date text-white">${game.rating}</span></h2>
@@ -313,7 +313,7 @@ function events(){
         localStorage.setItem('gamepublisher', Publisher);
         localStorage.setItem('gamecomments', Comments);
         todisplay(Name, Released, Genre, Rate, Description, Comments, Id);
-        //window.location.href = "aff_game.html";
+        window.location.href = "aff_game.html";
     });
   })
 }
