@@ -7,6 +7,8 @@ let slideImages = [
     "https://www.konami.com/efootball/s/img/main_page_1.png?v=856"
   ];
 
+let NotestoN = ["exceptional", "recommended", "meh", "skip"];
+
 let FavList = [];
 const slideDiv = document.getElementById('slide1');
 console.log(slideDiv);
@@ -79,23 +81,36 @@ async function fetchGames() {
 
     // --- Filtre par note ---
     document.getElementById('Notes').addEventListener('change', (e) => {
-      const note = e.target.value;
-      displaycarte.innerHTML = "";
+    const note = e.target.value;
+    displaycarte.innerHTML = "";
 
-      if (note === 'All') {
-        displaydata(allgame);
-        return;
-      }
+    if (note === 'all') {
+    displaydata(allgame);
+    return;
+    } else {
 
-      const filtred_Cartes_notes = allgame.filter(game => {
-        if (game.ratings && game.ratings.length > 0) {
-          return game.ratings.some(p => p.title.toLowerCase() === note.toLowerCase());
+    const filtred_Cartes_notes = allgame.filter(game => {
+
+    if (!game.ratings || game.ratings.length === 0) {
+      return false;
+    }
+    const maxRating = game.ratings.reduce((max, r) =>{
+        if(r.count > max)
+        {
+          return r;
+        }else{
+          return max;
         }
-        return false;
-      });
-      console.log(filtred_Cartes_notes);
-      displaydata(filtred_Cartes_notes);
-    });
+      }
+    );
+      return maxRating.title.toLowerCase() === note.toLowerCase();
+  });
+
+  console.log(filtred_Cartes_notes);
+  displaydata(filtred_Cartes_notes);
+}
+
+  });
 
   } catch (error) {
     console.error('Erreur lors de la récupération des jeux :', error);
