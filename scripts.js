@@ -93,7 +93,7 @@ async function fetchGames() {
         }
         return false;
       });
-
+      console.log(filtred_Cartes_notes)
       displaydata(filtred_Cartes_notes);
     });
 
