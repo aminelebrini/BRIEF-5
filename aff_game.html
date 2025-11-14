@@ -10,20 +10,14 @@
   <title id="gametitre"></title>
 </head>
 <body class="bg-[#151515] flex flex-col items-center justify-center">
-  <header class="flex flex-wrap items-center justify-between w-full p-5 gap-3">
-    <a href="index.html" class="text-white text-[25px] md:text-[30px] font-bold">NexPlay</a>
-
-    <div class="hidden sm:flex flex-row items-center justify-center text-white bg-[#302E2E] gap-2 p-2 rounded-[10px] w-full sm:w-auto">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search" class="outline-0 w-[100%] sm:w-[300px] bg-transparent text-white placeholder-gray-400">
-    </div>
-
+  <header class="flex flex-row md:flex-row items-center justify-between w-full p-5 gap-4 md:gap-0">
+    <h1 class="text-white text-[30px] font-bold"><a href="index.html">NexPlay</a></h1>
     <div class="flex flex-row gap-2">
-      <button type="button" class="bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full flex items-center justify-center">
-        <i class="fas fa-heart text-black text-[18px] md:text-[25px]"></i>
+      <button type="button" class="bg-white w-[40px] h-[40px] rounded-full md:w-[50px] md:h-[50px] flex items-center justify-center">
+        <a href="favoris.html"><i class="fas fa-heart text-black text-[20px] md:text-[30px]"></i></a>
       </button>
-      <button type="button" class="bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full flex items-center justify-center">
-        <i class="fas fa-sun text-black text-[18px] md:text-[25px]"></i>
+      <button type="button" id="darkligh" class="bg-white w-[40px] h-[40px] rounded-full md:w-[50px] md:h-[50px] flex items-center justify-center">
+        <i class="darkligh1 fas fa-sun text-black text-[20px] md:text-[30px]"></i>
       </button>
     </div>
   </header>
@@ -33,11 +27,11 @@
       <div class="text-section flex flex-col items-center md:items-start justify-center w-full md:w-1/2 space-y-4">
         <h1 id="titre" class="titre text-[30px] sm:text-[50px] md:text-[85px] text-white font-bold uppercase"></h1>
         <div id="icons" class="icons text-[22px] sm:text-[30px] md:text-[40px] text-white space-x-3"></div>
-        <button type="button" id="explore" class="explore bg-white text-black font-semibold p-3 rounded-[10px] mt-[10px] hover:bg-gray-200 transition-all duration-200 w-[180px] sm:w-[200px] md:w-[250px] md:h-[70px] md:text-[30px]">EXPLORE <i class="fas fa-arrow-right ml-2"></i></button>
+        <button type="button" id="explore" class="explore bg-white text-black font-semibold p-3 rounded-[10px] mt-[10px] hover:bg-gray-200 transition-all duration-200 w-[250px] sm:w-[200px] md:w-[250px] md:h-[70px] md:text-[30px]">EXPLORE <i class="fas fa-arrow-right ml-2"></i></button>
       </div>
 
       <div class="gameimg flex flex-col items-center justify-center w-full md:w-1/2 mt-5 md:mt-0">
-        <img id="logoimg" src="" class="logoimg w-[180px] h-[250px] sm:w-[220px] sm:h-[300px] md:w-[250px] rounded-[15px] shadow-md" alt="imagelogo">
+        <img id="logoimg" src="" class="logoimg w-[250px] h-[250px] sm:w-[220px] sm:h-[300px] md:w-[250px] rounded-[15px] shadow-md" alt="imagelogo">
         <div class="rate text-[#EBF70E] text-[20px] sm:text-[22px] mt-2" id="stars">
           <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </div>
@@ -53,29 +47,54 @@
     <div class="swiperimg md:col-start-5 md:col-end-7 md:row-span-3 flex items-center justify-center mt-[10%]" id="swipercard"></div>
   </div>
 
-  <div class="gameinfo flex flex-col items-center justify-center gap-[20px] p-4">
-    <div class="info-section flex flex-col gap-2 w-full md:w-2/3">
-      <h1 class="text-[#676363] text-[18px] sm:text-[20px]">Platforms: <span id="platform" class="text-white"></span></h1>
-      <h1 class="text-[#676363] text-[18px] sm:text-[20px]">Developer: <span id="developer" class="text-white"></span></h1>
-      <h1 class="text-[#676363] text-[18px] sm:text-[20px]">Genre: <span id="genre" class="text-white"></span></h1>
+  <div class="gameinfo w-full flex flex-col items-center justify-center p-4">
+
+  <div class="info-section grid grid-cols-1 sm:grid-cols-2 gap-4 w-full md:w-2/3">
+
+    <div class="flex flex-col gap-2">
+      <h1 class="text-[#676363] text-[25px] sm:text-[30px] flex justify-between">
+        Platforms:
+        <span id="platform" class="text-white font-semibold"></span>
+      </h1>
+
+      <h1 class="text-[#676363] text-[25px] sm:text-[30px] flex justify-between">
+        Developer:
+        <span id="developer" class="text-white font-semibold"></span>
+      </h1>
+
+      <h1 class="text-[#676363] text-[25px] sm:text-[30px] flex justify-between">
+        Genre:
+        <span id="genre" class="text-white font-semibold"></span>
+      </h1>
     </div>
-    <div class="info-section flex flex-col gap-2 w-full md:w-2/3">
-      <h1 class="text-[#676363] text-[18px] sm:text-[20px]">Publisher: <span id="publisher" class="text-white"></span></h1>
-      <h1 class="text-[#676363] text-[18px] sm:text-[20px]">Release Date: <span id="releasedate" class="text-white"></span></h1>
+
+    <div class="flex flex-col gap-2">
+      <h1 class="text-[#676363] text-[25px] sm:text-[30px] flex justify-between">
+        Publisher:
+        <span id="publisher" class="text-white font-semibold"></span>
+      </h1>
+
+      <h1 class="text-[#676363] text-[25px] sm:text-[30px] flex justify-between">
+        Release Date:
+        <span id="releasedate" class="text-white font-semibold"></span>
+      </h1>
     </div>
+
   </div>
 
+</div>
   <div class="system w-full flex flex-col items-center justify-center p-5">
     <button type="button" id="explore" class="explore bg-white text-black font-semibold p-3 rounded-[10px] mt-[10px] hover:bg-gray-200 transition-all duration-200 w-[200px] sm:w-[220px] md:w-[250px] md:h-[70px] md:text-[30px]">VISIT NOW <i class="fas fa-arrow-right ml-2"></i></button>
   </div>
 
   <div class="comment flex flex-col items-center justify-center gap-3 p-4 w-full sm:w-[90%] md:w-[70%]">
-    <div class="addComments bg-white w-full sm:w-[350px] h-[50px] rounded-[10px] flex flex-row items-center justify-between p-3">
+    <div class="addComments bg-white w-full md:w-[60%] sm:w-[350px] h-[50px] rounded-[10px] flex flex-row items-center justify-between p-3">
+        <h1 id="profilealphabet"></h1>
       <input type="text" id="addcomment" placeholder="add a comment" class="uppercase outline-0 w-[80%]">
       <button type="button" class="bg-black w-[40px] h-[40px] rounded-full flex items-center justify-center"><i class="fab fa-plus text-white"></i></button>
     </div>
 
-    <div class="comments w-full sm:w-[350px]">
+    <div class="comments w-full md:w-[80%] sm:w-[350px]">
       <div class="com flex flex-row items-center justify-start gap-3 p-2">
         <div class="bg-[#D9D9D9] w-[50px] h-[50px] flex items-center justify-center rounded-full font-bold text-[22px]">A</div>
         <h1 class="bg-white flex items-center w-[80%] h-[50px] rounded-[10px] px-3 text-[16px]">GOOD GAME</h1>
@@ -88,17 +107,18 @@
   </div>
 
   <div class="w-full p-5">
-    <div class="newsletter bg-white w-full sm:w-[90%] md:w-[70%] mx-auto flex flex-col items-center justify-center p-5 rounded-[10px]">
-      <h1 class="text-black font-bold text-[20px] sm:text-[25px]">NEWS LETTER</h1>
-      <div class="form flex flex-col items-center justify-center gap-3 mt-3 w-full">
-        <input type="email" placeholder="Email" class="border-2 border-black rounded-[10px] h-[50px] w-full sm:w-[300px] outline-0 px-3">
-        <button type="button" class="bg-black rounded-[10px] h-[50px] w-full sm:w-[300px] text-white text-[20px]">SUBSCRIBE</button>
-      </div>
+  <div class="newsletter bg-white w-full sm:w-[90%] md:w-[70%] mx-auto flex flex-col items-center justify-center p-5 rounded-[10px]">
+    <h1 class="text-black font-bold text-[20px] sm:text-[25px]">NEWS LETTER</h1>
+    <div class="form flex flex-col md:flex-row md:items-center md:justify-center gap-3 mt-3 w-full">
+      <input type="email" placeholder="Email" class="border-2 border-black rounded-[10px] h-[50px] w-full md:w-[60%] sm:w-[300px] outline-0 px-3">
+      <button type="button" class="bg-black rounded-[10px] h-[50px] md:w-[250px] sm:w-[300px] text-white text-[20px] md:ml-3">SUBSCRIBE</button>
     </div>
   </div>
+</div>
+
 
   <footer id="footer" class="flex flex-col md:flex-row items-center justify-between w-full p-5 text-white text-center gap-3">
-    <h1 class="text-[18px] md:text-[20px] font-bold">NexPlay</h1>
+    <h1 class="text-[25px] md:text-[20px] font-bold">NexPlay</h1>
     <div class="socialmedia flex flex-row items-center justify-center gap-3 text-[20px]">
       <i class="fab fa-facebook"></i><i class="fab fa-instagram"></i><i class="fab fa-x-twitter"></i><i class="fab fa-discord"></i>
     </div>

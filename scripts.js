@@ -93,7 +93,7 @@ async function fetchGames() {
         }
         return false;
       });
-
+      console.log(filtred_Cartes_notes)
       displaydata(filtred_Cartes_notes);
     });
 
@@ -500,27 +500,16 @@ function todisplay(name, released, genre, rating, Description, Comments, id) {
 
 }
 document.addEventListener('click', (e) => {
-  const Fav = document.getElementById('favorite-btn');
-  const icon = document.getElementById('iconFav');
-
-  const btn = document.addEventListener('click', (e) => {
-  const favBtn = e.target.closest('.favorite-btn');
+  const favBtn = e.target.closest('.favorite-btn'); 
   if (!favBtn) return;
 
   const icon = favBtn.querySelector('i');
   let FavList = JSON.parse(localStorage.getItem('gamefav')) || [];
+
   const dataset = favBtn.dataset;
 
   const gameData = {
     id: parseInt(dataset.id),
-  icon.classList.toggle('fa-solid');
-  icon.classList.toggle('fa-regular');
-  icon.classList.toggle('text-[#EBF70E]');
-
-  const dataset = favBtn.dataset;
-
-  const gameData = {
-    id: dataset.id,
     name: dataset.name,
     released: dataset.released,
     genre: dataset.genre,
@@ -549,31 +538,5 @@ document.addEventListener('click', (e) => {
   }
 
   localStorage.setItem('gamefav', JSON.stringify(FavList));
-    comments: dataset.comments
-  };
-  FavList.push(gameData);
-  console.log(FavList);
-  localStorage.setItem('gamefav', FavList);
 });
-const searchInput = document.getElementById('search');
-const displayContainer = document.getElementById('displaycartes');
-
-searchInput.addEventListener('input', ()=>{
-  const Searchvalue = searchInput.value.trim().toLowerCase();
-
-  const cards = displayContainer.querySelectorAll('#carte > div');
-  cards.forEach(card =>{
-    const GameNameEl = card.querySelector('.game-name');
-    if(!GameNameEl)
-    {
-      return;
-    }
-    const GameName = GameNameEl.textContent.toLowerCase();
-    if(GameName.includes(Searchvalue))
-    {
-      card.style.display = 'flex flex-col'; 
-    } else {
-      card.style.display = 'none';
-     }
-  });
-});
+}
