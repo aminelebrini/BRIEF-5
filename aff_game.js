@@ -26,8 +26,12 @@ document.getElementById('icons').appendChild(Ico);
 document.getElementById('explore').addEventListener('click', ()=>{
     window.location.href = Website;
 })
-
-document.getElementById('introgame').innerText = Description;
+let text = Description;
+const maxLength = 200; 
+if(text.length > maxLength){
+    text = Description.slice(0, maxLength) + '...';
+}
+document.getElementById('introgame').innerText = text;
 //document.getElementById('swipercard').appendChild(Bgadd);
 const swiperCards = document.querySelectorAll('#swipercard');
 
@@ -74,3 +78,37 @@ const proprities = document.getElementById('prop');
 // const notes = document.getElementById("notes");
 
 
+function setProfileAlphabet(username) {
+    const profile = document.getElementById('profilealphabet');
+    if (!username || username.trim() === "") {
+      profile.textContent = "";
+    } else {
+        profile.textContent = username.trim()[0].toUpperCase();
+    }
+}
+
+
+const commentInput = document.getElementById('addcomment');
+const commentsContainer = document.querySelector('.comments');
+
+document.querySelector('.addComments button').addEventListener('click', () => {
+    const commentText = commentInput.value.trim();
+
+    if (commentText === "") return;
+    setProfileAlphabet(commentText);
+    const newCom = document.createElement('div');
+    newCom.className = "com flex flex-row items-center justify-start gap-3 p-2";
+
+    const circle = document.createElement('div');
+    circle.className = "bg-[#D9D9D9] w-[50px] h-[50px] flex items-center justify-center rounded-full font-bold text-[22px]";
+    circle.textContent = document.getElementById('profilealphabet').textContent;
+
+    const text = document.createElement('h1');
+    text.className = "bg-white flex items-center w-[80%] h-[50px] rounded-[10px] px-3 text-[16px]";
+    text.textContent = commentText;
+
+    newCom.appendChild(circle);
+    newCom.appendChild(text);
+    commentsContainer.appendChild(newCom);
+    commentInput.value = "";
+});

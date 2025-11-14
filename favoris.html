@@ -10,17 +10,17 @@
     <title>NexPlay</title>
 </head>
 <body class="bg-[#151515] flex flex-col items-center justify-center">
-    <header class="flex flex-row items-center justify-between w-[100%] p-5">
-        <a href="index.html" class="text-white text-[30px] font-bold">NexPlay</a>
-        <div class="flex flex-row items-center justify-center text-white bg-[#302E2E] gap-2 p-3 rounded-[10px] hidden md:block">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search" class="outline-0 w-[300px]">
-        </div>
-        <div class="btn-header">
-            <button type="button" class="bg-white w-[40px] h-[40px] rounded-[50%] md:w-[50px] md:h-[50px]"><a href="favoris.html"><i class="fas fa-heart text-black text-[20px] md:text-[30px]"></i></a></button>
-            <button type="button" class="bg-white w-[40px] h-[40px] rounded-[50%] md:w-[50px] md:h-[50px]"><i class="fas fa-sun text-black text-[20px] md:text-[30px]"></i></button>
-        </div>
-    </header>
+    <header class="flex flex-row md:flex-row items-center justify-between w-full p-5 gap-4 md:gap-0">
+    <h1 class="text-white text-[30px] font-bold"><a href="index.html">NexPlay</a></h1>
+    <div class="flex flex-row gap-2">
+      <button type="button" class="bg-white w-[40px] h-[40px] rounded-full md:w-[50px] md:h-[50px] flex items-center justify-center">
+        <a href="favoris.html"><i class="fas fa-heart text-black text-[20px] md:text-[30px]"></i></a>
+      </button>
+      <button type="button" id="darkligh" class="bg-white w-[40px] h-[40px] rounded-full md:w-[50px] md:h-[50px] flex items-center justify-center">
+        <i class="darkligh1 fas fa-sun text-black text-[20px] md:text-[30px]"></i>
+      </button>
+    </div>
+  </header>
     <div id="container"></div>
     <footer id="footer">
         <h1 class="text-[20px] w-[20%] font-bold">NexPlay</h1>
