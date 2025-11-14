@@ -4,7 +4,7 @@ console.log(FavList);
 const display = document.getElementById('container');
 display.className = "p-2";
 if (FavList.length === 0) {
-  display.className = "p-2 h-[80vh] w-full flex flex-wrap items-center justify-center";
+  display.className = "p-2 h-[100vh] w-full flex flex-wrap items-center justify-center";
   const title = document.createElement('h1');
   title.textContent = "Empty favoris list!";
   title.className = "text-white text-center mt-10 text-[40px]";
