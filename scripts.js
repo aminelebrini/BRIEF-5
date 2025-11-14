@@ -35,25 +35,25 @@ async function fetchGames() {
 
     const allgame = data.results;
     displaydata(allgame);
-    events();
+    //events();
 
     // --- Filtrae par genre ---
     document.getElementById('genre').addEventListener('change', (e) => {
-      const gender = e.target.value;
+      const genre = e.target.value;
       displaycarte.innerHTML = "";
 
-      if (gender === 'All') {
+      if (genre === 'All') {
         displaydata(allgame);
         return;
       }
 
       const filtred_Cartes = allgame.filter(game => {
         if (game.genres && game.genres.length > 0) {
-          return game.genres.some(g => g.name.toLowerCase() === gender.toLowerCase());
+          return game.genres.some(g => g.name.toLowerCase() === genre.toLowerCase());
         }
         return false;
       });
-
+      console.log(filtred_Cartes);
       displaydata(filtred_Cartes);
     });
 
@@ -73,7 +73,7 @@ async function fetchGames() {
         }
         return false;
       });
-
+      console.log(filtred_Cartes_platform);
       displaydata(filtred_Cartes_platform);
     });
 
@@ -93,7 +93,7 @@ async function fetchGames() {
         }
         return false;
       });
-      console.log(filtred_Cartes_notes)
+      console.log(filtred_Cartes_notes);
       displaydata(filtred_Cartes_notes);
     });
 
@@ -153,8 +153,8 @@ function displaydata(data) {
 
     else{
       const carte = document.createElement('div');
-    carte.id = 'carte';
-    carte.className = "flex flex-wrap gap-4 justify-center";
+      carte.id = 'carte';
+      carte.className = "carte flex flex-wrap gap-4 justify-center";
     for(let i = 0 ; i < data.length; i++)
     {
         //console.log(data.length);
@@ -310,9 +310,9 @@ function displaydata(data) {
         </div>
       </div>
     `;
+    displaycarte.appendChild(carte);
   }
-
-  displaycarte.appendChild(carte);
+  events();
 }
 
 let n = 1;
@@ -450,6 +450,7 @@ function nextDataRes(next)
         `;
    displaycarte.appendChild(carte);
   }
+  events();
 }
 
 function events(){
@@ -540,3 +541,39 @@ document.addEventListener('click', (e) => {
   localStorage.setItem('gamefav', JSON.stringify(FavList));
 });
 }
+
+const searchInp = document.getElementById('search');
+    searchInp.addEventListener('input', () => {
+        const value = searchInp.value.trim().toLowerCase();
+        const cards = document.querySelectorAll('.game-name');
+        cards.forEach(card => {
+            const name = card.querySelector('.game-name').textContent.toLowerCase().trim();
+            if(name.includes(value))
+            {
+              card.style.display = "flex";
+            }else{
+              card.style.display = "none";
+            }
+        });
+    });
+let gamess = [];
+
+const search = document.querySelector('#search');
+
+search.addEventListener("input", () => {
+    const value = search.value.trim().toLowerCase();
+
+    let url = 'https://debuggers-games-api.duckdns.org/api/games?page=1';
+    if (value !== "") {
+        url = `https://debuggers-games-api.duckdns.org/api/games?search=${value}&page=1`;
+    }
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            gamess = data.results;
+            displaydata(gamess);
+        })
+        .catch(err => console.error("Erreur fetching games:", err));
+});
+
